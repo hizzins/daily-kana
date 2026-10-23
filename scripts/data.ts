@@ -10,7 +10,9 @@ import { createHash } from "node:crypto";
 import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
-import { splitKana } from "../src/grade/reading";
+import { gradingReading, splitKana } from "../src/grade/reading";
+
+export { gradingReading };
 
 export const LEVELS = ["n5", "n4", "n3", "n2", "n1"] as const;
 export type Level = (typeof LEVELS)[number];
@@ -80,8 +82,6 @@ export interface Problem {
   detail: string;
 }
 
-/** 채점에 쓰는 읽기. 접두·접미 표시 ～ 는 떼고 채점한다(화면은 원문 그대로). */
-export const gradingReading = (r: string) => r.replace(/^[～〜]+|[～〜]+$/g, "");
 /** 중복 판정 키. ID 가 아니라 내용으로 본다(같은 단어가 두 레벨에 다른 id 로 실릴 수 있다). */
 export const contentKey = (e: SourceEntry) => `${e.word}|${e.reading}|${e.meanings[0] ?? ""}`;
 // 한글·영문·숫자·공백·-·· 만. / , 가 있으면 항목이 둘로 읽혀 채점이 어긋난다(D15).

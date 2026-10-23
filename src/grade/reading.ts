@@ -112,6 +112,9 @@ export function splitKana(kana: string, shown: string = kana): Unit[] {
   return units;
 }
 
+/** 채점에 쓰는 읽기. 접두·접미 표시 ～ 는 떼고 채점한다(화면은 원문 그대로). 앱과 data.ts 가 같이 쓴다. */
+export const gradingReading = (r: string) => r.replace(/^[～〜]+|[～〜]+$/g, "");
+
 /** 입력 한글을 자모 토큰으로. 공백은 지우고 장음 기호(ー ~ 〜 - －)는 "-" 하나로 맞춘다. */
 export function tokenize(input: string): string[] {
   const s = input.normalize("NFC").replace(/\s+/g, "").replace(/[ー~〜－‐\-]/g, "-");
