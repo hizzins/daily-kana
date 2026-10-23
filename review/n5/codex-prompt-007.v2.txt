@@ -1,0 +1,50 @@
+You are reviewing Korean meaning data for a Japanese vocabulary quiz app (JLPT N5). Korean learners type the meaning in Korean; the answer is graded correct only if it matches ko_primary or one item of ko_accept after normalization (remove spaces, remove parenthesized text, strip a trailing "하다", lowercase Latin). No other fuzzy matching.
+
+Judge each item AGAINST THE GENERATION GUIDELINE BELOW, not only against the English gloss. The English gloss lists one sense; the guideline allows other senses that THIS SAME Japanese word (same spelling and reading) commonly has in everyday use. Do not flag those. Meanings of a different word that happens to share the reading are handled elsewhere by the app (homophones) — do not ask to add them.
+
+For EVERY item judge:
+(a) primary_wrong: is ko_primary an incorrect or misleading Korean meaning for this Japanese word? true/false
+(b) missing: common Korean answers a learner would naturally type for this word that are NOT accepted after normalization and that the guideline says should be included. Max 4. Empty if none.
+(c) inappropriate: items in ko_accept that the guideline says must NOT be included (another word's meaning, too broad/hypernym, transitive/intransitive mix-up, different part of speech changing the meaning, rare/nonstandard). Empty if none.
+Add a short Korean note (max 60 chars) only when something is flagged.
+
+Do not read or modify any files. Do not run tools. Answer directly.
+Output ONLY a JSON array, one object per item, in input order:
+{"n":<n>,"id":"<id>","primary_wrong":bool,"missing":[...],"inappropriate":[...],"note":"..."}
+
+GENERATION GUIDELINE:
+# 한국어 뜻 생성 지침 (gen-ko.prompt.md) v3
+
+OpenJLPT 단어(word, reading, 영어 meanings, pos)마다 `ko_primary` 1개와 `ko_accept[]`를 만든다.
+앱은 입력을 정규화(공백 제거, 괄호와 그 안 제거, 끝 "하다" 제거, 영문 소문자)한 뒤 **목록과 정확히 일치할 때만** 정답으로 본다. 그 밖의 유사 일치는 없다. 그래서 학습자가 자연스럽게 칠 형태는 목록에 직접 들어 있어야 한다.
+
+## ko_primary
+- 이 일본어 단어에 가장 자연스러운 한국어 하나.
+- 명사는 명사, 동사·い형용사는 기본형(가깝다), な형용사는 "~하다"(조용하다).
+- 인사·표현은 가장 흔한 존댓말 형태(죄송합니다, 잘 먹겠습니다).
+
+## ko_accept — 넣는 것
+1. **흔한 동의어**: 학습자가 이 단어 뜻으로 먼저 떠올릴 말(신발/구두, 채소/야채, 아이/어린이/어린아이).
+2. **활용형** (동사·형용사): 반말 어미형(가까워), 해요체(가까워요), 관형형(가까운). 기본형이 ko_primary가 아니면 기본형도 넣는다.
+3. **하다 구문**: "X하다" 뜻이면 "X를 하다"/"X을 하다"(샤워를 하다, 전화를 하다)도 넣는다. 정규화가 끝 "하다"만 떼므로 "X를"은 따로 맞춰야 한다.
+4. **흔한 구 표현**: 뜻이 구로 더 자연스러우면 구도 넣는다(시간이 걸리다, 돈이 들다, 전화를 걸다, 전화 걸다).
+5. **인사·표현의 높임 변형**: 합쇼체·해요체·반말(죄송합니다/죄송해요/미안해요/미안해).
+6. **같은 단어의 다른 흔한 뜻**: 영어 뜻에 하나만 있어도, **같은 표기·읽기의 이 단어가** 일상에서 흔히 그 뜻으로 쓰이면 넣는다(マッチ 성냥·경기, たいへん 매우·큰일, 年 해·나이, 昼 낮·점심). 다른 한자로 쓰는 별개 단어의 뜻은 넣지 않는다.
+7. **수량·반복 표현**: 고유어 수사는 아라비아 숫자+개도 넣는다(九つ 아홉·9개). "매~" 단어는 "~마다"도 넣는다(毎朝 매일 아침·아침마다).
+
+## 넣지 않는 것
+- 다른 일본어 단어의 뜻(동음이의어 뜻은 앱이 homophones로 따로 처리한다).
+- 다른 뜻과 헷갈릴 만큼 넓은 말(差す에 "쓰다" 단독 — 書く와 혼동).
+- **상위어·넓은 말**: 뜻의 핵심이 빠지는 말(妹에 동생, 声에 소리, ワイシャツ에 셔츠, 低い에 작다, 二人에 둘).
+- **자동사↔타동사 혼동**: 開く(あく, 열리다)에 열다, 始まる(시작되다)에 시작하다, 曲がる(돌다·구부러지다)에 꺾다, 消える(꺼지다)에 끄다.
+- **품사가 바뀌어 다른 뜻이 되는 말**: 古い에 옛날, 半에 30분.
+- 잘 쓰지 않거나 비표준인 말(후후년).
+- `/`, `,`, 가나·한자. 허용 문자는 한글·영문·숫자·공백·`-`·`·`.
+- 정규화 후 같은 문자열이 되는 중복(넣어도 무해하지만 줄인다).
+
+## 출력
+`{ "<id>": { "ko_primary": "...", "ko_accept": ["...", ...] } }` — 그 묶음의 모든 id를 빠짐없이.
+
+
+ITEMS:
+[{"n": 1, "id": "7a4ef637be", "word": "来週", "reading": "らいしゅう", "en": ["next week"], "pos": ["n", "adv"], "ko_primary": "다음 주", "ko_accept": ["다음주", "내주", "차주"]}, {"n": 2, "id": "c68f2caa2f", "word": "来年", "reading": "らいねん", "en": ["next year"], "pos": ["n", "adv"], "ko_primary": "내년", "ko_accept": ["다음 해", "명년"]}, {"n": 3, "id": "670f2dd0dc", "word": "ラジオ", "reading": "ラジオ", "en": ["radio"], "pos": ["n"], "ko_primary": "라디오", "ko_accept": []}, {"n": 4, "id": "924572e50c", "word": "ラジカセ", "reading": "ラジカセ", "en": ["radio cassette player"], "pos": ["n"], "ko_primary": "카세트 라디오", "ko_accept": ["라디오 카세트", "라디오카세트", "카세트라디오"]}, {"n": 5, "id": "a45af4ed89", "word": "りっぱ", "reading": "りっぱ", "en": ["splendid"], "pos": ["adj-na"], "ko_primary": "훌륭하다", "ko_accept": ["훌륭해", "훌륭해요", "훌륭한", "멋지다", "멋진", "근사하다", "멋있다", "대단하다"]}, {"n": 6, "id": "dc7d39c7af", "word": "留学生", "reading": "りゅうがくせい", "en": ["overseas student"], "pos": ["n"], "ko_primary": "유학생", "ko_accept": []}, {"n": 7, "id": "0139a208fe", "word": "両親", "reading": "りょうしん", "en": ["both parents"], "pos": ["n"], "ko_primary": "부모", "ko_accept": ["부모님", "양친"]}, {"n": 8, "id": "ee85169acd", "word": "料理", "reading": "りょうり", "en": ["cuisine"], "pos": ["n", "vs", "vt"], "ko_primary": "요리", "ko_accept": ["요리하다", "요리해요", "요리를 하다", "음식"]}, {"n": 9, "id": "2ba96bef9a", "word": "旅行", "reading": "りょこう", "en": ["travel"], "pos": ["n", "vs", "vi"], "ko_primary": "여행", "ko_accept": ["여행하다", "여행해요", "여행을 하다"]}, {"n": 10, "id": "92b3bb727e", "word": "零", "reading": "れい", "en": ["zero"], "pos": ["n"], "ko_primary": "영", "ko_accept": ["0", "제로", "공"]}, {"n": 11, "id": "f7a15687a1", "word": "冷蔵庫", "reading": "れいぞうこ", "en": ["refrigerator"], "pos": ["n"], "ko_primary": "냉장고", "ko_accept": []}, {"n": 12, "id": "0455201fe6", "word": "レコード", "reading": "レコード", "en": ["record"], "pos": ["n"], "ko_primary": "레코드", "ko_accept": ["음반", "기록", "레코드판"]}, {"n": 13, "id": "31893e4378", "word": "レストラン", "reading": "レストラン", "en": ["restaurant"], "pos": ["n"], "ko_primary": "레스토랑", "ko_accept": ["식당", "음식점"]}, {"n": 14, "id": "d23f06249a", "word": "練習", "reading": "れんしゅう", "en": ["to practice"], "pos": ["n", "vs", "vt"], "ko_primary": "연습", "ko_accept": ["연습하다", "연습해요", "연습을 하다"]}, {"n": 15, "id": "5fc0f979e6", "word": "廊下", "reading": "ろうか", "en": ["corridor"], "pos": ["n"], "ko_primary": "복도", "ko_accept": []}, {"n": 16, "id": "f9ccc7bfdf", "word": "六", "reading": "ろく", "en": ["six"], "pos": ["num"], "ko_primary": "육", "ko_accept": ["여섯", "6"]}, {"n": 17, "id": "38249a2dd2", "word": "ワイシャツ", "reading": "ワイシャツ", "en": ["business shirt"], "pos": ["n"], "ko_primary": "와이셔츠", "ko_accept": []}, {"n": 18, "id": "640761cb8b", "word": "若い", "reading": "わかい", "en": ["young"], "pos": ["adj-i"], "ko_primary": "젊다", "ko_accept": ["젊어", "젊어요", "젊은", "어리다"]}, {"n": 19, "id": "ecee43eb04", "word": "分かる", "reading": "わかる", "en": ["to be understood"], "pos": ["v5r", "vi"], "ko_primary": "알다", "ko_accept": ["알아", "알아요", "이해하다", "이해해요", "알겠다"]}, {"n": 20, "id": "0ca0de9dea", "word": "忘れる", "reading": "わすれる", "en": ["to forget"], "pos": ["v1", "vt"], "ko_primary": "잊다", "ko_accept": ["잊어", "잊어요", "잊어버리다", "까먹다"]}, {"n": 21, "id": "d5c2e69813", "word": "私", "reading": "わたくし", "en": ["(humble) I", "myself"], "pos": ["pn"], "ko_primary": "저", "ko_accept": ["제"]}, {"n": 22, "id": "b1d440d4e1", "word": "渡す", "reading": "わたす", "en": ["to hand over"], "pos": ["v5s", "vt"], "ko_primary": "건네다", "ko_accept": ["건네", "건네요", "건네주다", "넘기다", "전달하다", "넘겨주다"]}, {"n": 23, "id": "78255b9860", "word": "渡る", "reading": "わたる", "en": ["to go across"], "pos": ["v5r", "vi"], "ko_primary": "건너다", "ko_accept": ["건너", "건너요", "건너는", "지나가다", "건너가다"]}, {"n": 24, "id": "13b6dbec03", "word": "悪い", "reading": "わるい", "en": ["bad"], "pos": ["adj-i"], "ko_primary": "나쁘다", "ko_accept": ["나빠", "나빠요", "나쁜"]}]

@@ -1,0 +1,700 @@
+{
+ "72c04ce067": {
+  "ko_primary": "반",
+  "ko_accept": [
+   "학급",
+   "클래스"
+  ]
+ },
+ "5538df2bce": {
+  "ko_primary": "그램",
+  "ko_accept": [
+   "g"
+  ]
+ },
+ "2e2abd26ca": {
+  "ko_primary": "오다",
+  "ko_accept": [
+   "와",
+   "와요",
+   "오는"
+  ]
+ },
+ "d6b85573f3": {
+  "ko_primary": "자동차",
+  "ko_accept": [
+   "차",
+   "차량"
+  ]
+ },
+ "3c32cfb08a": {
+  "ko_primary": "검정",
+  "ko_accept": [
+   "검은색",
+   "검정색",
+   "까만색",
+   "흑색"
+  ]
+ },
+ "5e5300cf62": {
+  "ko_primary": "검다",
+  "ko_accept": [
+   "검어",
+   "검은",
+   "까맣다",
+   "까만"
+  ]
+ },
+ "e1634cb3e9": {
+  "ko_primary": "경찰관",
+  "ko_accept": [
+   "경찰"
+  ]
+ },
+ "9c1d724a61": {
+  "ko_primary": "오늘 아침",
+  "ko_accept": []
+ },
+ "19f270c68f": {
+  "ko_primary": "지우다",
+  "ko_accept": [
+   "지워",
+   "지워요",
+   "지우는",
+   "끄다",
+   "꺼",
+   "꺼요",
+   "끄는"
+  ]
+ },
+ "dd34250740": {
+  "ko_primary": "괜찮다",
+  "ko_accept": [
+   "괜찮아요",
+   "괜찮아",
+   "훌륭하다",
+   "충분하다",
+   "됐다",
+   "꽤",
+   "괜찮은"
+  ]
+ },
+ "2eb252da72": {
+  "ko_primary": "결혼",
+  "ko_accept": [
+   "결혼하다",
+   "결혼해요",
+   "결혼을 하다",
+   "결혼해",
+   "결혼하는"
+  ]
+ },
+ "04e80a2ba1": {
+  "ko_primary": "월요일",
+  "ko_accept": []
+ },
+ "2e1642b248": {
+  "ko_primary": "현관",
+  "ko_accept": []
+ },
+ "442c4aa1ca": {
+  "ko_primary": "건강",
+  "ko_accept": [
+   "건강하다",
+   "건강해요",
+   "활기",
+   "기운",
+   "원기",
+   "건강해",
+   "건강한",
+   "활기차다"
+  ]
+ },
+ "47c1fdbe2f": {
+  "ko_primary": "오",
+  "ko_accept": [
+   "다섯",
+   "5"
+  ]
+ },
+ "05cf590971": {
+  "ko_primary": "공원",
+  "ko_accept": []
+ },
+ "8699b8bec2": {
+  "ko_primary": "교차로",
+  "ko_accept": [
+   "사거리",
+   "네거리"
+  ]
+ },
+ "1288e600be": {
+  "ko_primary": "홍차",
+  "ko_accept": []
+ },
+ "d890e45616": {
+  "ko_primary": "목소리",
+  "ko_accept": []
+ },
+ "c552e79d34": {
+  "ko_primary": "코트",
+  "ko_accept": [
+   "외투",
+   "테니스 코트"
+  ]
+ },
+ "67126059f1": {
+  "ko_primary": "커피",
+  "ko_accept": []
+ },
+ "05123676c2": {
+  "ko_primary": "여기",
+  "ko_accept": [
+   "이곳"
+  ]
+ },
+ "9a7c962266": {
+  "ko_primary": "오후",
+  "ko_accept": []
+ },
+ "f114f6f499": {
+  "ko_primary": "9일",
+  "ko_accept": [
+   "아흐레",
+   "9일간"
+  ]
+ },
+ "cff3c57405": {
+  "ko_primary": "아홉",
+  "ko_accept": [
+   "9",
+   "아홉 개",
+   "9개"
+  ]
+ },
+ "c92dbe626a": {
+  "ko_primary": "오전",
+  "ko_accept": []
+ },
+ "d5d8c608aa": {
+  "ko_primary": "대답하다",
+  "ko_accept": [
+   "대답해",
+   "대답해요",
+   "답하다",
+   "대답",
+   "대답을 하다",
+   "대답하는"
+  ]
+ },
+ "a9191729e3": {
+  "ko_primary": "잘 먹었습니다",
+  "ko_accept": [
+   "잘 먹었어요",
+   "잘 먹었어",
+   "잘먹었습니다"
+  ]
+ },
+ "e9e492c68a": {
+  "ko_primary": "이쪽",
+  "ko_accept": [
+   "여기",
+   "이분"
+  ]
+ },
+ "be9b8bcb5e": {
+  "ko_primary": "이쪽",
+  "ko_accept": [
+   "여기"
+  ]
+ },
+ "2da7034c1e": {
+  "ko_primary": "컵",
+  "ko_accept": [
+   "유리잔",
+   "잔"
+  ]
+ },
+ "0020b9ee4e": {
+  "ko_primary": "올해",
+  "ko_accept": [
+   "금년"
+  ]
+ },
+ "bd3a2ad2ad": {
+  "ko_primary": "이",
+  "ko_accept": []
+ },
+ "a2694d259e": {
+  "ko_primary": "밥",
+  "ko_accept": [
+   "식사",
+   "쌀밥"
+  ]
+ },
+ "f586d7d023": {
+  "ko_primary": "복사하다",
+  "ko_accept": [
+   "복사해",
+   "복사해요",
+   "복사",
+   "복사를 하다",
+   "카피하다",
+   "복사하는"
+  ]
+ },
+ "61994485cb": {
+  "ko_primary": "곤란하다",
+  "ko_accept": [
+   "곤란해",
+   "곤란해요",
+   "난처하다",
+   "난처해",
+   "곤란",
+   "곤란한",
+   "난처해요",
+   "난처한"
+  ]
+ },
+ "4a11eb5fb4": {
+  "ko_primary": "미안합니다",
+  "ko_accept": [
+   "미안해요",
+   "미안해",
+   "죄송합니다",
+   "죄송해요"
+  ]
+ },
+ "6313cc9cb5": {
+  "ko_primary": "이것",
+  "ko_accept": [
+   "이거"
+  ]
+ },
+ "3793173687": {
+  "ko_primary": "이번 달",
+  "ko_accept": [
+   "이달"
+  ]
+ },
+ "7a27eadef1": {
+  "ko_primary": "이번 주",
+  "ko_accept": [
+   "금주"
+  ]
+ },
+ "e1978f90df": {
+  "ko_primary": "이런",
+  "ko_accept": [
+   "이러한"
+  ]
+ },
+ "0a65b39cf7": {
+  "ko_primary": "안녕하세요",
+  "ko_accept": [
+   "안녕",
+   "안녕하십니까"
+  ]
+ },
+ "6c0551dd8a": {
+  "ko_primary": "안녕하세요",
+  "ko_accept": [
+   "안녕하십니까",
+   "안녕"
+  ]
+ },
+ "a96e3a2b33": {
+  "ko_primary": "지갑",
+  "ko_accept": []
+ },
+ "dbd7cd319c": {
+  "ko_primary": "물고기",
+  "ko_accept": [
+   "생선"
+  ]
+ },
+ "20fcc4f54f": {
+  "ko_primary": "앞",
+  "ko_accept": [
+   "먼저",
+   "앞서"
+  ]
+ },
+ "4c39babf5f": {
+  "ko_primary": "피다",
+  "ko_accept": [
+   "피어",
+   "피어요",
+   "피는"
+  ]
+ },
+ "c10cb3070d": {
+  "ko_primary": "작문",
+  "ko_accept": [
+   "글짓기",
+   "작문하다",
+   "작문을 하다",
+   "글쓰기"
+  ]
+ },
+ "8af5030b7a": {
+  "ko_primary": "설탕",
+  "ko_accept": []
+ },
+ "688bc67044": {
+  "ko_primary": "춥다",
+  "ko_accept": [
+   "추워",
+   "추워요",
+   "추운"
+  ]
+ },
+ "0a1f511640": {
+  "ko_primary": "안녕히 가세요",
+  "ko_accept": [
+   "안녕히 계세요",
+   "잘 가",
+   "안녕",
+   "잘 가요"
+  ]
+ },
+ "5cb07674a3": {
+  "ko_primary": "삼",
+  "ko_accept": [
+   "셋",
+   "3"
+  ]
+ },
+ "e2695084c9": {
+  "ko_primary": "산책",
+  "ko_accept": [
+   "산책하다",
+   "산책해요",
+   "산책을 하다",
+   "산책해",
+   "산책하는"
+  ]
+ },
+ "da4b805e0b": {
+  "ko_primary": "사",
+  "ko_accept": [
+   "넷",
+   "4"
+  ]
+ },
+ "b366a3d677": {
+  "ko_primary": "소금",
+  "ko_accept": []
+ },
+ "2c41aedcba": {
+  "ko_primary": "그러나",
+  "ko_accept": [
+   "하지만",
+   "그런데"
+  ]
+ },
+ "d5c916ca85": {
+  "ko_primary": "시간",
+  "ko_accept": []
+ },
+ "573bc15b1d": {
+  "ko_primary": "일",
+  "ko_accept": [
+   "직업",
+   "업무",
+   "일하다",
+   "일해",
+   "일해요",
+   "일하는",
+   "일을 하다"
+  ]
+ },
+ "8ec35978bd": {
+  "ko_primary": "사전",
+  "ko_accept": []
+ },
+ "dd36cae3a9": {
+  "ko_primary": "아래",
+  "ko_accept": [
+   "밑"
+  ]
+ },
+ "988db98632": {
+  "ko_primary": "칠",
+  "ko_accept": [
+   "일곱",
+   "7"
+  ]
+ },
+ "2c5c99977c": {
+  "ko_primary": "질문",
+  "ko_accept": [
+   "질문하다",
+   "질문해요",
+   "질문을 하다",
+   "물음",
+   "질문해",
+   "질문하는"
+  ]
+ },
+ "ebf194a316": {
+  "ko_primary": "자전거",
+  "ko_accept": []
+ },
+ "78fd1a0e8a": {
+  "ko_primary": "자동차",
+  "ko_accept": [
+   "차"
+  ]
+ },
+ "ec6fd2f845": {
+  "ko_primary": "죽다",
+  "ko_accept": [
+   "죽어",
+   "죽어요",
+   "죽는"
+  ]
+ },
+ "6156bfb418": {
+  "ko_primary": "사전",
+  "ko_accept": []
+ },
+ "995a632b12": {
+  "ko_primary": "자신",
+  "ko_accept": [
+   "자기",
+   "스스로"
+  ]
+ },
+ "01420cdf0f": {
+  "ko_primary": "닫히다",
+  "ko_accept": [
+   "닫혀",
+   "닫혀요",
+   "닫히는"
+  ]
+ },
+ "8e6c15bef9": {
+  "ko_primary": "매다",
+  "ko_accept": [
+   "매",
+   "매요",
+   "묶다",
+   "조이다",
+   "매는"
+  ]
+ },
+ "95827b08e3": {
+  "ko_primary": "닫다",
+  "ko_accept": [
+   "닫아",
+   "닫아요",
+   "닫는"
+  ]
+ },
+ "5101640e7e": {
+  "ko_primary": "사진",
+  "ko_accept": []
+ },
+ "f71424e3ff": {
+  "ko_primary": "셔츠",
+  "ko_accept": []
+ },
+ "d9c88143a2": {
+  "ko_primary": "샤워",
+  "ko_accept": []
+ },
+ "db9f5d4422": {
+  "ko_primary": "십",
+  "ko_accept": [
+   "열",
+   "10"
+  ]
+ },
+ "5bae559507": {
+  "ko_primary": "수업",
+  "ko_accept": [
+   "수업하다",
+   "수업을 하다",
+   "수업해",
+   "수업해요"
+  ]
+ },
+ "4daa103d7d": {
+  "ko_primary": "숙제",
+  "ko_accept": []
+ },
+ "50525927ee": {
+  "ko_primary": "튼튼하다",
+  "ko_accept": [
+   "튼튼해",
+   "튼튼해요",
+   "튼튼한",
+   "건강하다",
+   "질기다"
+  ]
+ },
+ "9476d7966d": {
+  "ko_primary": "간장",
+  "ko_accept": []
+ },
+ "dcc87a37fb": {
+  "ko_primary": "식당",
+  "ko_accept": []
+ },
+ "1fcb2fece8": {
+  "ko_primary": "알다",
+  "ko_accept": [
+   "알아",
+   "알아요",
+   "아는"
+  ]
+ },
+ "8997f64f52": {
+  "ko_primary": "하얗다",
+  "ko_accept": [
+   "하얀",
+   "희다",
+   "흰"
+  ]
+ },
+ "b8317395af": {
+  "ko_primary": "신문",
+  "ko_accept": []
+ },
+ "44d9d70862": {
+  "ko_primary": "수요일",
+  "ko_accept": []
+ },
+ "e82727193e": {
+  "ko_primary": "피우다",
+  "ko_accept": [
+   "피워",
+   "피워요",
+   "빨다",
+   "들이마시다",
+   "피우는"
+  ]
+ },
+ "f0f5f6b29b": {
+  "ko_primary": "치마",
+  "ko_accept": [
+   "스커트"
+  ]
+ },
+ "20cbecd474": {
+  "ko_primary": "좋아하다",
+  "ko_accept": [
+   "좋아해",
+   "좋아해요",
+   "좋아함",
+   "좋다",
+   "좋아하는"
+  ]
+ },
+ "ce75057c4c": {
+  "ko_primary": "곧",
+  "ko_accept": [
+   "바로",
+   "금방",
+   "즉시",
+   "금세",
+   "곧장",
+   "곧바로",
+   "당장"
+  ]
+ },
+ "0d38b01113": {
+  "ko_primary": "적다",
+  "ko_accept": [
+   "적어",
+   "적어요",
+   "적은"
+  ]
+ },
+ "a8722990f1": {
+  "ko_primary": "곧바로",
+  "ko_accept": [
+   "바로",
+   "즉시",
+   "곧"
+  ]
+ },
+ "c373555102": {
+  "ko_primary": "조금",
+  "ko_accept": [
+   "약간",
+   "좀"
+  ]
+ },
+ "67f5908e10": {
+  "ko_primary": "시원하다",
+  "ko_accept": [
+   "시원해",
+   "시원해요",
+   "시원한",
+   "선선하다"
+  ]
+ },
+ "8149d77689": {
+  "ko_primary": "난로",
+  "ko_accept": [
+   "히터",
+   "스토브"
+  ]
+ },
+ "938a169f6c": {
+  "ko_primary": "숟가락",
+  "ko_accept": [
+   "스푼"
+  ]
+ },
+ "0a33903ccf": {
+  "ko_primary": "스포츠",
+  "ko_accept": [
+   "운동"
+  ]
+ },
+ "10fe0704ca": {
+  "ko_primary": "바지",
+  "ko_accept": []
+ },
+ "d671097071": {
+  "ko_primary": "살다",
+  "ko_accept": [
+   "살아",
+   "살아요",
+   "사는",
+   "거주하다"
+  ]
+ },
+ "508131fe89": {
+  "ko_primary": "슬리퍼",
+  "ko_accept": [
+   "실내화"
+  ]
+ },
+ "c4cdc162d7": {
+  "ko_primary": "하다",
+  "ko_accept": [
+   "해",
+   "해요",
+   "하는"
+  ]
+ },
+ "c9a15e8777": {
+  "ko_primary": "앉다",
+  "ko_accept": [
+   "앉아",
+   "앉아요",
+   "앉는"
+  ]
+ },
+ "898b067287": {
+  "ko_primary": "키",
+  "ko_accept": [
+   "신장",
+   "등"
+  ]
+ }
+}

@@ -1,0 +1,694 @@
+{
+ "15f4136421": {
+  "ko_primary": "불다",
+  "ko_accept": [
+   "불어",
+   "불어요",
+   "부는"
+  ]
+ },
+ "68571540e1": {
+  "ko_primary": "옷",
+  "ko_accept": [
+   "의복",
+   "의류"
+  ]
+ },
+ "0c1dbd4838": {
+  "ko_primary": "둘",
+  "ko_accept": [
+   "2",
+   "두 개",
+   "2개"
+  ]
+ },
+ "c518fb9116": {
+  "ko_primary": "돼지고기",
+  "ko_accept": []
+ },
+ "94c2076821": {
+  "ko_primary": "두 사람",
+  "ko_accept": [
+   "2명",
+   "두 명"
+  ]
+ },
+ "750786cc55": {
+  "ko_primary": "2일",
+  "ko_accept": [
+   "이틀",
+   "2일간"
+  ]
+ },
+ "4162724f9a": {
+  "ko_primary": "굵다",
+  "ko_accept": [
+   "굵어",
+   "굵어요",
+   "굵은",
+   "두껍다"
+  ]
+ },
+ "5791e248f1": {
+  "ko_primary": "내리다",
+  "ko_accept": [
+   "내려",
+   "내려요",
+   "비가 오다",
+   "눈이 오다"
+  ]
+ },
+ "aa60dd4a11": {
+  "ko_primary": "오래되다",
+  "ko_accept": [
+   "오래돼",
+   "오래된",
+   "낡다",
+   "낡은",
+   "헌"
+  ]
+ },
+ "34784ed6ca": {
+  "ko_primary": "목욕",
+  "ko_accept": [
+   "욕조"
+  ]
+ },
+ "79ddbb2b98": {
+  "ko_primary": "문장",
+  "ko_accept": [
+   "글"
+  ]
+ },
+ "f8fc73bd75": {
+  "ko_primary": "페이지",
+  "ko_accept": [
+   "쪽",
+   "면"
+  ]
+ },
+ "619dae70e9": {
+  "ko_primary": "서투르다",
+  "ko_accept": [
+   "서툴다",
+   "서툴러",
+   "서툰",
+   "못하다",
+   "잘 못하다"
+  ]
+ },
+ "91cf4ea2fd": {
+  "ko_primary": "침대",
+  "ko_accept": [
+   "베드"
+  ]
+ },
+ "db38ebd955": {
+  "ko_primary": "애완동물",
+  "ko_accept": [
+   "반려동물",
+   "펫"
+  ]
+ },
+ "e78074927c": {
+  "ko_primary": "방",
+  "ko_accept": []
+ },
+ "71c372d7b2": {
+  "ko_primary": "근처",
+  "ko_accept": [
+   "부근",
+   "주변"
+  ]
+ },
+ "dd1183b005": {
+  "ko_primary": "펜",
+  "ko_accept": []
+ },
+ "65783b95dd": {
+  "ko_primary": "공부",
+  "ko_accept": [
+   "공부하다",
+   "공부해요",
+   "공부를 하다"
+  ]
+ },
+ "84887dde48": {
+  "ko_primary": "편리하다",
+  "ko_accept": [
+   "편리해",
+   "편리해요",
+   "편리한",
+   "편리"
+  ]
+ },
+ "cfc75623ae": {
+  "ko_primary": "모자",
+  "ko_accept": []
+ },
+ "785a997045": {
+  "ko_primary": "볼펜",
+  "ko_accept": []
+ },
+ "f71c69492e": {
+  "ko_primary": "다른",
+  "ko_accept": [
+   "그 밖",
+   "나머지",
+   "딴",
+   "다른 것",
+   "그 외",
+   "기타"
+  ]
+ },
+ "ab9f2792c4": {
+  "ko_primary": "주머니",
+  "ko_accept": [
+   "호주머니",
+   "포켓"
+  ]
+ },
+ "418493d941": {
+  "ko_primary": "갖고 싶다",
+  "ko_accept": [
+   "갖고 싶어",
+   "원하다",
+   "원해요",
+   "가지고 싶다"
+  ]
+ },
+ "2dbe65ee1d": {
+  "ko_primary": "우체통",
+  "ko_accept": [
+   "우편함",
+   "포스트"
+  ]
+ },
+ "785adc4f9d": {
+  "ko_primary": "가늘다",
+  "ko_accept": [
+   "가늘어",
+   "가는",
+   "날씬하다"
+  ]
+ },
+ "04ab635f4b": {
+  "ko_primary": "단추",
+  "ko_accept": [
+   "버튼"
+  ]
+ },
+ "23ec5a0b3d": {
+  "ko_primary": "호텔",
+  "ko_accept": []
+ },
+ "0e8f798dbf": {
+  "ko_primary": "책",
+  "ko_accept": []
+ },
+ "3839786bac": {
+  "ko_primary": "책장",
+  "ko_accept": [
+   "책꽂이"
+  ]
+ },
+ "849baaf2c3": {
+  "ko_primary": "정말",
+  "ko_accept": [
+   "진짜",
+   "사실",
+   "진실",
+   "참"
+  ]
+ },
+ "a59ba12bc5": {
+  "ko_primary": "매일 아침",
+  "ko_accept": [
+   "아침마다"
+  ]
+ },
+ "771fbe6b4d": {
+  "ko_primary": "매달",
+  "ko_accept": [
+   "매월"
+  ]
+ },
+ "fd1c93832f": {
+  "ko_primary": "매주",
+  "ko_accept": [
+   "주마다"
+  ]
+ },
+ "039a696225": {
+  "ko_primary": "매일",
+  "ko_accept": [
+   "날마다"
+  ]
+ },
+ "83700909d4": {
+  "ko_primary": "매년",
+  "ko_accept": [
+   "해마다"
+  ]
+ },
+ "2584943533": {
+  "ko_primary": "매일 밤",
+  "ko_accept": [
+   "밤마다"
+  ]
+ },
+ "319e218950": {
+  "ko_primary": "앞",
+  "ko_accept": [
+   "전",
+   "이전",
+   "전에"
+  ]
+ },
+ "ae3e0a705f": {
+  "ko_primary": "돌다",
+  "ko_accept": [
+   "돌아",
+   "돌아요",
+   "구부러지다",
+   "휘다"
+  ]
+ },
+ "6a7163f5f7": {
+  "ko_primary": "아직",
+  "ko_accept": []
+ },
+ "4d76d06d84": {
+  "ko_primary": "마을",
+  "ko_accept": [
+   "동네"
+  ]
+ },
+ "6a39701228": {
+  "ko_primary": "기다리다",
+  "ko_accept": [
+   "기다려",
+   "기다려요",
+   "기다리는"
+  ]
+ },
+ "ede9ab2f7f": {
+  "ko_primary": "똑바로",
+  "ko_accept": [
+   "곧장",
+   "곧바로",
+   "쭉"
+  ]
+ },
+ "7734194821": {
+  "ko_primary": "창문",
+  "ko_accept": [
+   "창"
+  ]
+ },
+ "a0ff0f67c8": {
+  "ko_primary": "만",
+  "ko_accept": [
+   "10000",
+   "일만"
+  ]
+ },
+ "7309a238e8": {
+  "ko_primary": "닦다",
+  "ko_accept": [
+   "닦아",
+   "닦아요",
+   "닦는"
+  ]
+ },
+ "f1046f3190": {
+  "ko_primary": "오른쪽",
+  "ko_accept": [
+   "우",
+   "우측",
+   "오른편"
+  ]
+ },
+ "69a792520f": {
+  "ko_primary": "물",
+  "ko_accept": []
+ },
+ "0c8a588e53": {
+  "ko_primary": "가게",
+  "ko_accept": [
+   "상점"
+  ]
+ },
+ "db35a99e28": {
+  "ko_primary": "보여주다",
+  "ko_accept": [
+   "보여줘",
+   "보여줘요",
+   "보여 주다",
+   "보이다"
+  ]
+ },
+ "dc29195f18": {
+  "ko_primary": "길",
+  "ko_accept": [
+   "도로"
+  ]
+ },
+ "1713d0bbe8": {
+  "ko_primary": "3일",
+  "ko_accept": [
+   "사흘",
+   "3일간"
+  ]
+ },
+ "b36b221d33": {
+  "ko_primary": "셋",
+  "ko_accept": [
+   "3",
+   "세 개",
+   "3개"
+  ]
+ },
+ "85e4ba2f28": {
+  "ko_primary": "초록",
+  "ko_accept": [
+   "초록색",
+   "녹색"
+  ]
+ },
+ "d2b9c47656": {
+  "ko_primary": "여러분",
+  "ko_accept": [
+   "모두"
+  ]
+ },
+ "84e465b526": {
+  "ko_primary": "남",
+  "ko_accept": [
+   "남쪽"
+  ]
+ },
+ "85b37b6884": {
+  "ko_primary": "보다",
+  "ko_accept": [
+   "봐",
+   "봐요",
+   "보는"
+  ]
+ },
+ "2676514561": {
+  "ko_primary": "모두",
+  "ko_accept": [
+   "다들",
+   "모든 사람"
+  ]
+ },
+ "bf44ddad08": {
+  "ko_primary": "6일",
+  "ko_accept": [
+   "엿새",
+   "6일간"
+  ]
+ },
+ "8e862f05f0": {
+  "ko_primary": "건너편",
+  "ko_accept": [
+   "맞은편",
+   "저쪽",
+   "너머",
+   "저편",
+   "저기"
+  ]
+ },
+ "0a3894175f": {
+  "ko_primary": "어렵다",
+  "ko_accept": [
+   "어려워",
+   "어려워요",
+   "어려운"
+  ]
+ },
+ "7ecc2c4bfc": {
+  "ko_primary": "여섯",
+  "ko_accept": [
+   "6",
+   "여섯 개",
+   "6개"
+  ]
+ },
+ "ae534d4ca8": {
+  "ko_primary": "눈",
+  "ko_accept": []
+ },
+ "eb5450490b": {
+  "ko_primary": "미터",
+  "ko_accept": [
+   "m"
+  ]
+ },
+ "72eb77e07a": {
+  "ko_primary": "안경",
+  "ko_accept": []
+ },
+ "c5b7ad76fd": {
+  "ko_primary": "벌써",
+  "ko_accept": [
+   "이미",
+   "이제",
+   "더"
+  ]
+ },
+ "3ae16ad93a": {
+  "ko_primary": "한 번 더",
+  "ko_accept": [
+   "다시 한 번",
+   "다시"
+  ]
+ },
+ "d10bb92f3e": {
+  "ko_primary": "목요일",
+  "ko_accept": []
+ },
+ "16fda19d79": {
+  "ko_primary": "들다",
+  "ko_accept": [
+   "들어",
+   "들어요",
+   "갖다",
+   "가지다",
+   "쥐다"
+  ]
+ },
+ "a8f5f4c59e": {
+  "ko_primary": "더",
+  "ko_accept": [
+   "더욱",
+   "좀 더"
+  ]
+ },
+ "782272bfda": {
+  "ko_primary": "물건",
+  "ko_accept": [
+   "것"
+  ]
+ },
+ "5b92758003": {
+  "ko_primary": "문",
+  "ko_accept": [
+   "대문"
+  ]
+ },
+ "4f0f6b6ae7": {
+  "ko_primary": "문제",
+  "ko_accept": []
+ },
+ "8d29f60b23": {
+  "ko_primary": "채소 가게",
+  "ko_accept": [
+   "야채 가게",
+   "청과물 가게",
+   "채소가게",
+   "야채가게"
+  ]
+ },
+ "ead1ae2736": {
+  "ko_primary": "쉽다",
+  "ko_accept": [
+   "쉬워",
+   "쉬워요",
+   "쉬운",
+   "간단하다"
+  ]
+ },
+ "33b86212ca": {
+  "ko_primary": "싸다",
+  "ko_accept": [
+   "싸",
+   "싸요",
+   "싼"
+  ]
+ },
+ "d4a1d27d3b": {
+  "ko_primary": "휴일",
+  "ko_accept": [
+   "휴식",
+   "휴가",
+   "방학",
+   "쉬는 날"
+  ]
+ },
+ "3e3efcb45f": {
+  "ko_primary": "쉬다",
+  "ko_accept": [
+   "쉬어",
+   "쉬어요",
+   "쉬는"
+  ]
+ },
+ "62c4216674": {
+  "ko_primary": "여덟",
+  "ko_accept": [
+   "8",
+   "여덟 개",
+   "8개"
+  ]
+ },
+ "e8a5cbdf0a": {
+  "ko_primary": "산",
+  "ko_accept": []
+ },
+ "f81d503d6f": {
+  "ko_primary": "하다",
+  "ko_accept": [
+   "해",
+   "해요",
+   "주다"
+  ]
+ },
+ "285b008622": {
+  "ko_primary": "저녁",
+  "ko_accept": [
+   "해질녘"
+  ]
+ },
+ "ae2b9f6d7e": {
+  "ko_primary": "저녁밥",
+  "ko_accept": [
+   "저녁 식사",
+   "저녁"
+  ]
+ },
+ "8b86921749": {
+  "ko_primary": "우체국",
+  "ko_accept": []
+ },
+ "39fff8fc4b": {
+  "ko_primary": "어젯밤",
+  "ko_accept": [
+   "어제 저녁",
+   "간밤"
+  ]
+ },
+ "50b217ed0b": {
+  "ko_primary": "유명하다",
+  "ko_accept": [
+   "유명해",
+   "유명해요",
+   "유명한",
+   "유명"
+  ]
+ },
+ "78c044b951": {
+  "ko_primary": "눈",
+  "ko_accept": []
+ },
+ "d980cb1531": {
+  "ko_primary": "천천히",
+  "ko_accept": [
+   "느긋하게",
+   "느리게"
+  ]
+ },
+ "4f8e83945d": {
+  "ko_primary": "8일",
+  "ko_accept": [
+   "여드레",
+   "8일간"
+  ]
+ },
+ "1907b6fc38": {
+  "ko_primary": "옷",
+  "ko_accept": [
+   "서양 옷",
+   "양복"
+  ]
+ },
+ "4cb7c969c4": {
+  "ko_primary": "옆",
+  "ko_accept": [
+   "가로",
+   "곁",
+   "폭"
+  ]
+ },
+ "222ae96df7": {
+  "ko_primary": "4일",
+  "ko_accept": [
+   "나흘",
+   "4일간"
+  ]
+ },
+ "1000ee441a": {
+  "ko_primary": "넷",
+  "ko_accept": [
+   "4",
+   "네 개",
+   "4개"
+  ]
+ },
+ "76f05a0739": {
+  "ko_primary": "부르다",
+  "ko_accept": [
+   "불러",
+   "불러요",
+   "부르는",
+   "초대하다"
+  ]
+ },
+ "eb7e675902": {
+  "ko_primary": "읽다",
+  "ko_accept": [
+   "읽어",
+   "읽어요",
+   "읽는"
+  ]
+ },
+ "6c214111ea": {
+  "ko_primary": "보다",
+  "ko_accept": [
+   "보다 더",
+   "에서"
+  ]
+ },
+ "1a0aec6793": {
+  "ko_primary": "밤",
+  "ko_accept": [
+   "저녁"
+  ]
+ },
+ "83da293775": {
+  "ko_primary": "약하다",
+  "ko_accept": [
+   "약해",
+   "약해요",
+   "약한"
+  ]
+ },
+ "61fd50f12e": {
+  "ko_primary": "다음 달",
+  "ko_accept": [
+   "다음달",
+   "내달"
+  ]
+ }
+}
