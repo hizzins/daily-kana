@@ -1,0 +1,706 @@
+[
+ {
+  "id": "7ba7ba2434",
+  "word": "さあ",
+  "reading": "さあ",
+  "meanings": [
+   "well…"
+  ],
+  "pos": [
+   "int"
+  ],
+  "other_readings": null,
+  "other_forms": null
+ },
+ {
+  "id": "45c705d5b2",
+  "word": "再来年",
+  "reading": "さらいねん",
+  "meanings": [
+   "year after next"
+  ],
+  "pos": [
+   "n",
+   "adv"
+  ],
+  "other_readings": null,
+  "other_forms": null
+ },
+ {
+  "id": "9dd0572f05",
+  "word": "靴",
+  "reading": "くつ",
+  "meanings": [
+   "shoes"
+  ],
+  "pos": [
+   "n"
+  ],
+  "other_readings": null,
+  "other_forms": null
+ },
+ {
+  "id": "eb9acca7ba",
+  "word": "冬",
+  "reading": "ふゆ",
+  "meanings": [
+   "winter"
+  ],
+  "pos": [
+   "n",
+   "adv"
+  ],
+  "other_readings": null,
+  "other_forms": null
+ },
+ {
+  "id": "e7ca1b2fd5",
+  "word": "たて",
+  "reading": "たて",
+  "meanings": [
+   "length",
+   "height"
+  ],
+  "pos": [
+   "n"
+  ],
+  "other_readings": null,
+  "other_forms": [
+   "縦"
+  ]
+ },
+ {
+  "id": "1f4bb6e503",
+  "word": "子供",
+  "reading": "こども",
+  "meanings": [
+   "child"
+  ],
+  "pos": [
+   "n"
+  ],
+  "other_readings": null,
+  "other_forms": null
+ },
+ {
+  "id": "27f9d40392",
+  "word": "マッチ",
+  "reading": "マッチ",
+  "meanings": [
+   "match"
+  ],
+  "pos": [
+   "n"
+  ],
+  "other_readings": null,
+  "other_forms": null
+ },
+ {
+  "id": "a21ba677f2",
+  "word": "近い",
+  "reading": "ちかい",
+  "meanings": [
+   "near"
+  ],
+  "pos": [
+   "adj-i"
+  ],
+  "other_readings": null,
+  "other_forms": null
+ },
+ {
+  "id": "a379d413fd",
+  "word": "熱い",
+  "reading": "あつい",
+  "meanings": [
+   "hot to the touch"
+  ],
+  "pos": [
+   "adj-i"
+  ],
+  "other_readings": null,
+  "other_forms": null
+ },
+ {
+  "id": "d0fb41651f",
+  "word": "どう",
+  "reading": "どう",
+  "meanings": [
+   "how",
+   "in what way"
+  ],
+  "pos": [
+   "adv"
+  ],
+  "other_readings": null,
+  "other_forms": null
+ },
+ {
+  "id": "036f4180a2",
+  "word": "歌",
+  "reading": "うた",
+  "meanings": [
+   "song"
+  ],
+  "pos": [
+   "n"
+  ],
+  "other_readings": null,
+  "other_forms": null
+ },
+ {
+  "id": "c7e14d8454",
+  "word": "テレビ",
+  "reading": "テレビ",
+  "meanings": [
+   "television"
+  ],
+  "pos": [
+   "n"
+  ],
+  "other_readings": null,
+  "other_forms": null
+ },
+ {
+  "id": "eec0f93991",
+  "word": "曇り",
+  "reading": "くもり",
+  "meanings": [
+   "cloudy weather"
+  ],
+  "pos": [
+   "n"
+  ],
+  "other_readings": null,
+  "other_forms": [
+   "曇"
+  ]
+ },
+ {
+  "id": "feae64eac4",
+  "word": "すみません",
+  "reading": "すみません",
+  "meanings": [
+   "sorry",
+   "excuse me"
+  ],
+  "pos": [
+   "exp",
+   "int"
+  ],
+  "other_readings": null,
+  "other_forms": [
+   "済みません"
+  ]
+ },
+ {
+  "id": "1c0b0f77b6",
+  "word": "台所",
+  "reading": "だいどころ",
+  "meanings": [
+   "kitchen"
+  ],
+  "pos": [
+   "n"
+  ],
+  "other_readings": null,
+  "other_forms": null
+ },
+ {
+  "id": "98eace7008",
+  "word": "白",
+  "reading": "しろ",
+  "meanings": [
+   "white"
+  ],
+  "pos": [
+   "n",
+   "adj-no"
+  ],
+  "other_readings": null,
+  "other_forms": null
+ },
+ {
+  "id": "e8cdf8b85a",
+  "word": "耳",
+  "reading": "みみ",
+  "meanings": [
+   "ear"
+  ],
+  "pos": [
+   "n"
+  ],
+  "other_readings": null,
+  "other_forms": null
+ },
+ {
+  "id": "4e2aefb855",
+  "word": "差す",
+  "reading": "さす",
+  "meanings": [
+   "to stretch out hands",
+   "to raise an umbrella"
+  ],
+  "pos": [
+   "v5s",
+   "vt"
+  ],
+  "other_readings": null,
+  "other_forms": null
+ },
+ {
+  "id": "6318b0423a",
+  "word": "万年筆",
+  "reading": "まんねんひつ",
+  "meanings": [
+   "fountain pen"
+  ],
+  "pos": [
+   "n"
+  ],
+  "other_readings": null,
+  "other_forms": null
+ },
+ {
+  "id": "9b2d455dfe",
+  "word": "楽しい",
+  "reading": "たのしい",
+  "meanings": [
+   "enjoyable"
+  ],
+  "pos": [
+   "adj-i"
+  ],
+  "other_readings": null,
+  "other_forms": null
+ },
+ {
+  "id": "ae0cc00f94",
+  "word": "言う",
+  "reading": "いう",
+  "meanings": [
+   "to say"
+  ],
+  "pos": [
+   "v5u",
+   "vt"
+  ],
+  "other_readings": null,
+  "other_forms": null
+ },
+ {
+  "id": "b19034ded1",
+  "word": "まずい",
+  "reading": "まずい",
+  "meanings": [
+   "unpleasant"
+  ],
+  "pos": [
+   "adj-i"
+  ],
+  "other_readings": null,
+  "other_forms": [
+   "不味い"
+  ]
+ },
+ {
+  "id": "3c039918ba",
+  "word": "電話",
+  "reading": "でんわ",
+  "meanings": [
+   "telephone"
+  ],
+  "pos": [
+   "n",
+   "vs",
+   "vt",
+   "vi"
+  ],
+  "other_readings": null,
+  "other_forms": null
+ },
+ {
+  "id": "34e6f7d220",
+  "word": "あちら",
+  "reading": "あちら",
+  "meanings": [
+   "there"
+  ],
+  "pos": [
+   "pn"
+  ],
+  "other_readings": null,
+  "other_forms": [
+   "彼方"
+  ]
+ },
+ {
+  "id": "687082e55c",
+  "word": "かかる",
+  "reading": "かかる",
+  "meanings": [
+   "to take time or money"
+  ],
+  "pos": [
+   "v5r",
+   "vi"
+  ],
+  "other_readings": null,
+  "other_forms": [
+   "掛かる"
+  ]
+ },
+ {
+  "id": "2e6c7d2d9d",
+  "word": "荷物",
+  "reading": "にもつ",
+  "meanings": [
+   "luggage"
+  ],
+  "pos": [
+   "n"
+  ],
+  "other_readings": null,
+  "other_forms": null
+ },
+ {
+  "id": "5028971b39",
+  "word": "村",
+  "reading": "むら",
+  "meanings": [
+   "village"
+  ],
+  "pos": [
+   "n"
+  ],
+  "other_readings": null,
+  "other_forms": null
+ },
+ {
+  "id": "156f17113e",
+  "word": "疲れる",
+  "reading": "つかれる",
+  "meanings": [
+   "to get tired"
+  ],
+  "pos": [
+   "v1",
+   "vi"
+  ],
+  "other_readings": null,
+  "other_forms": null
+ },
+ {
+  "id": "0ce2b98d3b",
+  "word": "かける",
+  "reading": "かける",
+  "meanings": [
+   "to call by phone"
+  ],
+  "pos": [
+   "v1",
+   "vt"
+  ],
+  "other_readings": null,
+  "other_forms": [
+   "掛ける"
+  ]
+ },
+ {
+  "id": "1763fc412a",
+  "word": "上手",
+  "reading": "じょうず",
+  "meanings": [
+   "skillful"
+  ],
+  "pos": [
+   "adj-na",
+   "n"
+  ],
+  "other_readings": null,
+  "other_forms": null
+ },
+ {
+  "id": "eac7a22620",
+  "word": "いただきます",
+  "reading": "いただきます",
+  "meanings": [
+   "expression of gratitude before meals"
+  ],
+  "pos": [
+   "exp"
+  ],
+  "other_readings": null,
+  "other_forms": [
+   "頂きます"
+  ]
+ },
+ {
+  "id": "091c8c0e07",
+  "word": "じゃ",
+  "reading": "じゃ",
+  "meanings": [
+   "well then…"
+  ],
+  "pos": [
+   "conj"
+  ],
+  "other_readings": null,
+  "other_forms": [
+   "じゃあ"
+  ]
+ },
+ {
+  "id": "402eb0d21f",
+  "word": "交番",
+  "reading": "こうばん",
+  "meanings": [
+   "police box"
+  ],
+  "pos": [
+   "n"
+  ],
+  "other_readings": null,
+  "other_forms": null
+ },
+ {
+  "id": "ab36109960",
+  "word": "丸い",
+  "reading": "まるい",
+  "meanings": [
+   "round",
+   "circular"
+  ],
+  "pos": [
+   "adj-i"
+  ],
+  "other_readings": null,
+  "other_forms": null
+ },
+ {
+  "id": "a891b73f8b",
+  "word": "どうして",
+  "reading": "どうして",
+  "meanings": [
+   "for what reason"
+  ],
+  "pos": [
+   "adv"
+  ],
+  "other_readings": null,
+  "other_forms": [
+   "如何して"
+  ]
+ },
+ {
+  "id": "a371cc6a54",
+  "word": "雑誌",
+  "reading": "ざっし",
+  "meanings": [
+   "magazine"
+  ],
+  "pos": [
+   "n"
+  ],
+  "other_readings": null,
+  "other_forms": null
+ },
+ {
+  "id": "9b08365493",
+  "word": "ちょうど",
+  "reading": "ちょうど",
+  "meanings": [
+   "exactly"
+  ],
+  "pos": [
+   "adv"
+  ],
+  "other_readings": null,
+  "other_forms": [
+   "丁度",
+   "恰度"
+  ]
+ },
+ {
+  "id": "acba6e07ba",
+  "word": "全部",
+  "reading": "ぜんぶ",
+  "meanings": [
+   "all"
+  ],
+  "pos": [
+   "n",
+   "adj-no",
+   "adv"
+  ],
+  "other_readings": null,
+  "other_forms": null
+ },
+ {
+  "id": "55f3080ce4",
+  "word": "歩く",
+  "reading": "あるく",
+  "meanings": [
+   "to walk"
+  ],
+  "pos": [
+   "v5k",
+   "vi"
+  ],
+  "other_readings": null,
+  "other_forms": null
+ },
+ {
+  "id": "162e00c6ef",
+  "word": "また",
+  "reading": "また",
+  "meanings": [
+   "again",
+   "and"
+  ],
+  "pos": [
+   "adv"
+  ],
+  "other_readings": null,
+  "other_forms": [
+   "又"
+  ]
+ },
+ {
+  "id": "a5aceb6426",
+  "word": "あびる",
+  "reading": "あびる",
+  "meanings": [
+   "to bathe",
+   "to shower"
+  ],
+  "pos": [
+   "v1",
+   "vt"
+  ],
+  "other_readings": null,
+  "other_forms": [
+   "浴びる"
+  ]
+ },
+ {
+  "id": "178469ba7a",
+  "word": "静か",
+  "reading": "しずか",
+  "meanings": [
+   "quiet"
+  ],
+  "pos": [
+   "adj-na"
+  ],
+  "other_readings": null,
+  "other_forms": null
+ },
+ {
+  "id": "eb1c9a5df9",
+  "word": "今晩",
+  "reading": "こんばん",
+  "meanings": [
+   "this evening"
+  ],
+  "pos": [
+   "n",
+   "adv"
+  ],
+  "other_readings": null,
+  "other_forms": null
+ },
+ {
+  "id": "1c9db63bdc",
+  "word": "家族",
+  "reading": "かぞく",
+  "meanings": [
+   "family"
+  ],
+  "pos": [
+   "n"
+  ],
+  "other_readings": null,
+  "other_forms": null
+ },
+ {
+  "id": "734d275fd9",
+  "word": "病院",
+  "reading": "びょういん",
+  "meanings": [
+   "hospital"
+  ],
+  "pos": [
+   "n"
+  ],
+  "other_readings": null,
+  "other_forms": null
+ },
+ {
+  "id": "19db29fbbb",
+  "word": "よく",
+  "reading": "よく",
+  "meanings": [
+   "often",
+   "well"
+  ],
+  "pos": [
+   "adv"
+  ],
+  "other_readings": null,
+  "other_forms": null
+ },
+ {
+  "id": "67775e3b25",
+  "word": "番号",
+  "reading": "ばんごう",
+  "meanings": [
+   "number"
+  ],
+  "pos": [
+   "n"
+  ],
+  "other_readings": null,
+  "other_forms": null
+ },
+ {
+  "id": "936289666e",
+  "word": "野菜",
+  "reading": "やさい",
+  "meanings": [
+   "vegetable"
+  ],
+  "pos": [
+   "n"
+  ],
+  "other_readings": null,
+  "other_forms": null
+ },
+ {
+  "id": "8568eded6e",
+  "word": "短い",
+  "reading": "みじかい",
+  "meanings": [
+   "short"
+  ],
+  "pos": [
+   "adj-i"
+  ],
+  "other_readings": null,
+  "other_forms": null
+ },
+ {
+  "id": "491cfa69be",
+  "word": "言葉",
+  "reading": "ことば",
+  "meanings": [
+   "word",
+   "language"
+  ],
+  "pos": [
+   "n"
+  ],
+  "other_readings": null,
+  "other_forms": null
+ }
+]
