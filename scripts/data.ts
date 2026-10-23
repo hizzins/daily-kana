@@ -1,4 +1,5 @@
-// 단어 데이터 파이프라인. OpenJLPT 원천 + Claude Code 가 만든 한국어 뜻(data/ko) + 사람이 고친 항목(data/overrides.json)
+// 단어 데이터 파이프라인. OpenJLPT 원천 + 사용자 단어(data/source/custom.json) + Claude Code 가 만든 한국어 뜻(data/ko)
+// + 사람이 고친 항목(data/overrides.json)
 // → 앱이 레벨별로 지연 로드하는 public/data/<level>.json.
 //
 //   npm run data -- fetch            원천을 고정 커밋에서 받고 해시를 SOURCE.json 에 기록
@@ -21,6 +22,7 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const SOURCE_DIR = join(ROOT, "data/source", `openjlpt-${OPENJLPT.version}`);
 const KO_DIR = join(ROOT, "data/ko");
 const OVERRIDES_FILE = join(ROOT, "data/overrides.json");
+const CUSTOM_FILE = join(ROOT, "data/source/custom.json");
 const OUT_DIR = join(ROOT, "public/data");
 const BATCH_DIR = join(ROOT, ".work/batches");
 
@@ -40,6 +42,8 @@ export interface KoEntry {
 
 export interface Override {
   exclude?: boolean;
+  level?: Level; // 다른 레벨로 옮긴다(교재 단어를 지금 공부하는 레벨에 넣을 때)
+  other_readings?: string[]; // 원천에 없는 다른 읽기 추가(私 わたくし + わたし)
   word?: string;
   pron?: string; // 같은 길이의 실제 발음 가나(こんにちは → こんにちわ)
   ko_primary?: string;
@@ -114,11 +118,20 @@ export function buildLevels(input: BuildInput): BuildOutput {
   const pronCandidates: BuildOutput["pronCandidates"] = [];
   const knownIds = new Set<string>();
 
+  // 0. 레벨 이동(overrides.level)을 먼저 적용한다. 옮겨진 단어는 원본 id 를 그대로 쓴다.
+  const sources: Partial<Record<Level, SourceEntry[]>> = {};
+  for (const level of LEVELS)
+    for (const e of input.sources[level] ?? []) {
+      const to = input.overrides[e.id]?.level ?? level;
+      (sources[to] ??= []).push(e);
+    }
+  for (const level of LEVELS) if (input.sources[level]) sources[level] ??= [];
+
   // 1. 중복: 레벨 간 같은 내용이면 낮은 레벨(N5 쪽)만 남기고, 같은 레벨 안이면 문제로 막는다.
   const seen = new Map<string, Level>();
   const kept: Partial<Record<Level, SourceEntry[]>> = {};
   for (const level of LEVELS) {
-    const list = input.sources[level];
+    const list = sources[level];
     if (!list) continue;
     const here = new Set<string>();
     kept[level] = [];
@@ -169,7 +182,8 @@ export function buildLevels(input: BuildInput): BuildOutput {
       for (const m of [ko_primary, ...ko_accept])
         if (m && !KO_ALLOWED.test(m)) problems.push({ ...at, kind: "bad-char", detail: `허용되지 않는 문자: "${m}"` });
 
-      const readings = [reading, ...(e.other_readings ?? []).map(gradingReading)];
+      const otherReadings = [...(e.other_readings ?? []), ...(o.other_readings ?? [])];
+      const readings = [reading, ...otherReadings.map(gradingReading)];
       for (const r of readings) {
         const err = splittable(r);
         if (err) problems.push({ ...at, kind: "unsplittable", detail: err });
@@ -188,7 +202,7 @@ export function buildLevels(input: BuildInput): BuildOutput {
           id: e.id,
           word,
           reading: e.reading,
-          other_readings: e.other_readings ?? [],
+          other_readings: otherReadings,
           ...(o.pron ? { pron: o.pron } : {}),
           kanji: word !== e.reading,
           ko_primary,
@@ -225,12 +239,22 @@ const writeJson = (path: string, data: unknown, pretty = true) => {
 };
 const sha256 = (path: string) => createHash("sha256").update(readFileSync(path)).digest("hex");
 
+/** 원천에 없는 단어. id 는 OpenJLPT 와 같은 방식(SHA-1(word + U+0000 + reading) 앞 10자리)으로 정한다. */
+export interface CustomEntry extends SourceEntry {
+  level: Level;
+  note?: string; // 출처(교재 등)
+}
+export const customId = (word: string, reading: string) =>
+  createHash("sha1").update(`${word}\u0000${reading}`).digest("hex").slice(0, 10);
+
 function loadSources(): Partial<Record<Level, SourceEntry[]>> {
   const out: Partial<Record<Level, SourceEntry[]>> = {};
   for (const level of LEVELS) {
     const path = join(SOURCE_DIR, `${level}.json`);
     if (existsSync(path)) out[level] = readJson<SourceEntry[]>(path);
   }
+  if (existsSync(CUSTOM_FILE))
+    for (const { level, note: _note, ...e } of readJson<CustomEntry[]>(CUSTOM_FILE)) (out[level] ??= []).push(e);
   return out;
 }
 

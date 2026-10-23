@@ -1,0 +1,176 @@
+{
+ "05567c942f": {
+  "ko_primary": "아버지",
+  "ko_accept": [
+   "아빠"
+  ]
+ },
+ "0afc2f360f": {
+  "ko_primary": "나",
+  "ko_accept": [
+   "저"
+  ]
+ },
+ "0872fdeb8f": {
+  "ko_primary": "얼굴",
+  "ko_accept": []
+ },
+ "c5936f318a": {
+  "ko_primary": "이어폰",
+  "ko_accept": []
+ },
+ "e386bd9952": {
+  "ko_primary": "우롱차",
+  "ko_accept": [
+   "우롱"
+  ]
+ },
+ "39b28ab0e0": {
+  "ko_primary": "에어컨",
+  "ko_accept": [
+   "냉방기"
+  ]
+ },
+ "99f12d685e": {
+  "ko_primary": "오믈렛",
+  "ko_accept": []
+ },
+ "7c4fd106a1": {
+  "ko_primary": "열쇠",
+  "ko_accept": [
+   "키"
+  ]
+ },
+ "9eb55df604": {
+  "ko_primary": "스위스",
+  "ko_accept": []
+ },
+ "1406e4d32e": {
+  "ko_primary": "서울",
+  "ko_accept": []
+ },
+ "a866997312": {
+  "ko_primary": "트리",
+  "ko_accept": [
+   "크리스마스 트리",
+   "크리스마스트리"
+  ]
+ },
+ "cc3181b98d": {
+  "ko_primary": "니트족",
+  "ko_accept": [
+   "니트"
+  ]
+ },
+ "a4394e5d50": {
+  "ko_primary": "카누",
+  "ko_accept": []
+ },
+ "80e3a99856": {
+  "ko_primary": "목록",
+  "ko_accept": [
+   "리스트",
+   "명단"
+  ]
+ },
+ "b921645383": {
+  "ko_primary": "미국",
+  "ko_accept": [
+   "아메리카"
+  ]
+ },
+ "7db3da6e1b": {
+  "ko_primary": "구름",
+  "ko_accept": []
+ },
+ "8426193f36": {
+  "ko_primary": "케이크",
+  "ko_accept": [
+   "케익"
+  ]
+ },
+ "02dea2f4f6": {
+  "ko_primary": "테니스",
+  "ko_accept": []
+ },
+ "505c1fd62e": {
+  "ko_primary": "벌레",
+  "ko_accept": [
+   "곤충"
+  ]
+ },
+ "2a04aa688d": {
+  "ko_primary": "사인",
+  "ko_accept": [
+   "서명",
+   "신호"
+  ]
+ },
+ "b66409ed87": {
+  "ko_primary": "벚꽃",
+  "ko_accept": [
+   "벚나무",
+   "벚꽃나무"
+  ]
+ },
+ "7650278af2": {
+  "ko_primary": "술",
+  "ko_accept": [
+   "사케",
+   "청주"
+  ]
+ },
+ "4fbf3d9b7a": {
+  "ko_primary": "수건",
+  "ko_accept": [
+   "타월",
+   "타올"
+  ]
+ },
+ "7864a376ed": {
+  "ko_primary": "팀",
+  "ko_accept": []
+ },
+ "9dda296d47": {
+  "ko_primary": "쪽",
+  "ko_accept": [
+   "방향",
+   "편",
+   "방면"
+  ]
+ },
+ "f3143300d0": {
+  "ko_primary": "우유",
+  "ko_accept": [
+   "밀크"
+  ]
+ },
+ "c13f4ea321": {
+  "ko_primary": "메모",
+  "ko_accept": [
+   "메모하다",
+   "메모를 하다"
+  ]
+ },
+ "1e16b1d46a": {
+  "ko_primary": "스카프",
+  "ko_accept": []
+ },
+ "35d3365a8f": {
+  "ko_primary": "시스템",
+  "ko_accept": [
+   "체계"
+  ]
+ },
+ "5fe5d25c22": {
+  "ko_primary": "세일",
+  "ko_accept": [
+   "할인",
+   "할인 판매"
+  ]
+ },
+ "8d0e3e599c": {
+  "ko_primary": "타이어",
+  "ko_accept": []
+ }
+}

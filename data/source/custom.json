@@ -1,0 +1,199 @@
+[
+ {
+  "id": "05567c942f",
+  "word": "父",
+  "reading": "ちち",
+  "meanings": [
+   "father"
+  ],
+  "pos": [
+   "n"
+  ],
+  "other_readings": null,
+  "level": "n5",
+  "note": "교재(히라가나·가타카나 단어 쓰기)"
+ },
+ {
+  "id": "0afc2f360f",
+  "word": "わたし",
+  "reading": "わたし",
+  "meanings": [
+   "I",
+   "me"
+  ],
+  "pos": [
+   "pn"
+  ],
+  "other_readings": null,
+  "level": "n5",
+  "note": "교재(히라가나·가타카나 단어 쓰기)"
+ },
+ {
+  "id": "0872fdeb8f",
+  "word": "顔",
+  "reading": "かお",
+  "meanings": [
+   "face"
+  ],
+  "pos": [
+   "n"
+  ],
+  "other_readings": null,
+  "level": "n5",
+  "note": "교재(히라가나·가타카나 단어 쓰기)"
+ },
+ {
+  "id": "c5936f318a",
+  "word": "イヤホン",
+  "reading": "イヤホン",
+  "meanings": [
+   "earphones"
+  ],
+  "pos": [
+   "n"
+  ],
+  "other_readings": null,
+  "level": "n5",
+  "note": "교재(히라가나·가타카나 단어 쓰기)"
+ },
+ {
+  "id": "e386bd9952",
+  "word": "ウーロン",
+  "reading": "ウーロン",
+  "meanings": [
+   "oolong (tea)"
+  ],
+  "pos": [
+   "n"
+  ],
+  "other_readings": null,
+  "level": "n5",
+  "note": "교재(히라가나·가타카나 단어 쓰기)"
+ },
+ {
+  "id": "39b28ab0e0",
+  "word": "エアコン",
+  "reading": "エアコン",
+  "meanings": [
+   "air conditioner"
+  ],
+  "pos": [
+   "n"
+  ],
+  "other_readings": null,
+  "level": "n5",
+  "note": "교재(히라가나·가타카나 단어 쓰기)"
+ },
+ {
+  "id": "99f12d685e",
+  "word": "オムレツ",
+  "reading": "オムレツ",
+  "meanings": [
+   "omelette"
+  ],
+  "pos": [
+   "n"
+  ],
+  "other_readings": null,
+  "level": "n5",
+  "note": "교재(히라가나·가타카나 단어 쓰기)"
+ },
+ {
+  "id": "7c4fd106a1",
+  "word": "キー",
+  "reading": "キー",
+  "meanings": [
+   "key"
+  ],
+  "pos": [
+   "n"
+  ],
+  "other_readings": null,
+  "level": "n5",
+  "note": "교재(히라가나·가타카나 단어 쓰기)"
+ },
+ {
+  "id": "9eb55df604",
+  "word": "スイス",
+  "reading": "スイス",
+  "meanings": [
+   "Switzerland"
+  ],
+  "pos": [
+   "n"
+  ],
+  "other_readings": null,
+  "level": "n5",
+  "note": "교재(히라가나·가타카나 단어 쓰기)"
+ },
+ {
+  "id": "1406e4d32e",
+  "word": "ソウル",
+  "reading": "ソウル",
+  "meanings": [
+   "Seoul"
+  ],
+  "pos": [
+   "n"
+  ],
+  "other_readings": null,
+  "level": "n5",
+  "note": "교재(히라가나·가타카나 단어 쓰기)"
+ },
+ {
+  "id": "a866997312",
+  "word": "ツリー",
+  "reading": "ツリー",
+  "meanings": [
+   "tree (e.g. Christmas tree)"
+  ],
+  "pos": [
+   "n"
+  ],
+  "other_readings": null,
+  "level": "n5",
+  "note": "교재(히라가나·가타카나 단어 쓰기)"
+ },
+ {
+  "id": "cc3181b98d",
+  "word": "ニート",
+  "reading": "ニート",
+  "meanings": [
+   "NEET (not in education, employment or training)"
+  ],
+  "pos": [
+   "n"
+  ],
+  "other_readings": null,
+  "level": "n5",
+  "note": "교재(히라가나·가타카나 단어 쓰기)"
+ },
+ {
+  "id": "a4394e5d50",
+  "word": "カヌー",
+  "reading": "カヌー",
+  "meanings": [
+   "canoe"
+  ],
+  "pos": [
+   "n"
+  ],
+  "other_readings": null,
+  "level": "n5",
+  "note": "교재(히라가나·가타카나 단어 쓰기)"
+ },
+ {
+  "id": "80e3a99856",
+  "word": "リスト",
+  "reading": "リスト",
+  "meanings": [
+   "list"
+  ],
+  "pos": [
+   "n"
+  ],
+  "other_readings": null,
+  "level": "n5",
+  "note": "교재(히라가나·가타카나 단어 쓰기)"
+ }
+]

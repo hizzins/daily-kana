@@ -1,0 +1,52 @@
+You are reviewing Korean meaning data for a Japanese vocabulary quiz app (JLPT N5). Korean learners type the meaning in Korean; the answer is graded correct only if it matches ko_primary or one item of ko_accept after normalization (remove spaces, remove parenthesized text, strip a trailing "하다", lowercase Latin). No other fuzzy matching.
+
+Judge each item AGAINST THE GENERATION GUIDELINE BELOW, not only against the English gloss. The English gloss lists one sense; the guideline allows other senses that THIS SAME Japanese word (same spelling and reading) commonly has in everyday use. Do not flag those. Meanings of a different word that happens to share the reading are handled elsewhere by the app (homophones) — do not ask to add them.
+
+For EVERY item judge:
+(a) primary_wrong: is ko_primary an incorrect or misleading Korean meaning for this Japanese word? true/false
+(b) missing: common Korean answers a learner would naturally type for this word that are NOT accepted after normalization and that the guideline says should be included. Max 4. Empty if none.
+(c) inappropriate: items in ko_accept that the guideline says must NOT be included (another word's meaning, too broad/hypernym, transitive/intransitive mix-up, different part of speech changing the meaning, rare/nonstandard). Empty if none.
+Add a short Korean note (max 60 chars) only when something is flagged.
+
+Do not read or modify any files. Do not run tools. Answer directly.
+Output ONLY a JSON array, one object per item, in input order:
+{"n":<n>,"id":"<id>","primary_wrong":bool,"missing":[...],"inappropriate":[...],"note":"..."}
+
+GENERATION GUIDELINE:
+# 한국어 뜻 생성 지침 (gen-ko.prompt.md) v4
+
+OpenJLPT 단어(word, reading, 영어 meanings, pos)마다 `ko_primary` 1개와 `ko_accept[]`를 만든다.
+앱은 입력을 정규화(공백 제거, 괄호와 그 안 제거, 끝 "하다" 제거, 영문 소문자)한 뒤 **목록과 정확히 일치할 때만** 정답으로 본다. 그 밖의 유사 일치는 없다. 그래서 학습자가 자연스럽게 칠 형태는 목록에 직접 들어 있어야 한다.
+
+## ko_primary
+- 이 일본어 단어에 가장 자연스러운 한국어 하나.
+- 명사는 명사, 동사·い형용사는 기본형(가깝다), な형용사는 "~하다"(조용하다).
+- 인사·표현은 가장 흔한 존댓말 형태(죄송합니다, 잘 먹겠습니다).
+
+## ko_accept — 넣는 것
+1. **흔한 동의어**: 학습자가 이 단어 뜻으로 먼저 떠올릴 말(신발/구두, 채소/야채, 아이/어린이/어린아이).
+2. **활용형** (동사·형용사): 반말 어미형(가까워), 해요체(가까워요), 관형형(가까운). 기본형이 ko_primary가 아니면 기본형도 넣는다.
+3. **하다 구문**: "X하다" 뜻이면 "X를 하다"/"X을 하다"(샤워를 하다, 전화를 하다)도 넣는다. 정규화가 끝 "하다"만 떼므로 "X를"은 따로 맞춰야 한다.
+4. **흔한 구 표현**: 뜻이 구로 더 자연스러우면 구도 넣는다(시간이 걸리다, 돈이 들다, 전화를 걸다, 전화 걸다).
+5. **인사·표현의 높임 변형**: 합쇼체·해요체·반말(죄송합니다/죄송해요/미안해요/미안해).
+6. **같은 단어의 다른 흔한 뜻** (한국어로 옮길 때 관용적으로 쓰는 말 포함 — 薬を飲む 약을 먹다라서 飲む에 먹다): 영어 뜻에 하나만 있어도, **같은 표기·읽기의 이 단어가** 일상에서 흔히 그 뜻으로 쓰이면 넣는다(マッチ 성냥·경기, たいへん 매우·큰일, 年 해·나이, 昼 낮·점심). 다른 한자로 쓰는 별개 단어의 뜻은 넣지 않는다.
+7. **수량·반복 표현**: 고유어 수사는 아라비아 숫자+개도 넣는다(九つ 아홉·9개). "매~" 단어는 "~마다"도 넣는다(毎朝 매일 아침·아침마다).
+
+## 넣지 않는 것
+- 다른 일본어 단어의 뜻(동음이의어 뜻은 앱이 homophones로 따로 처리한다).
+- 다른 뜻과 헷갈릴 만큼 넓은 말(差す에 "쓰다" 단독 — 書く와 혼동).
+- **상위어·넓은 말**: 뜻의 핵심이 빠지는 말(妹에 동생, 声에 소리, ワイシャツ에 셔츠, 低い에 작다, 二人에 둘).
+- **자동사↔타동사 혼동**: 開く(あく, 열리다)에 열다, 始まる(시작되다)에 시작하다, 曲がる(돌다·구부러지다)에 꺾다, 消える(꺼지다)에 끄다.
+- **품사가 바뀌어 다른 뜻이 되는 말**: 古い에 옛날, 半에 30분. 반대로 **뜻이 같은 품사 변형은 넣는다**(危ない 위험하다·위험, 嫌い 싫어하다·싫음, 晴れ 맑음·맑다, 始まる 시작되다·시작) — 학습자가 뜻을 알면 자연스럽게 칠 형태다.
+- **다른 단어의 뜻**: 같은 읽기의 다른 단어(帰る 돌아가다 ≠ 帰ってくる 돌아오다, 黄色い 노랗다 ≠ 黄色 노란색), 다른 한자 단어(つける의 付ける 붙이다는 같은 단어로 본다).
+- **잘 안 쓰는 말·어색한 말**: 문어·옛말(벗, 변소), 직역 인사(좋은 저녁, 처음 뵙겠어요).
+- 잘 쓰지 않거나 비표준인 말(후후년).
+- `/`, `,`, 가나·한자. 허용 문자는 한글·영문·숫자·공백·`-`·`·`.
+- 정규화 후 같은 문자열이 되는 중복(넣어도 무해하지만 줄인다).
+
+## 출력
+`{ "<id>": { "ko_primary": "...", "ko_accept": ["...", ...] } }` — 그 묶음의 모든 id를 빠짐없이.
+
+
+ITEMS:
+[{"n": 1, "id": "05567c942f", "word": "父", "reading": "ちち", "en": ["father"], "pos": ["n"], "ko_primary": "아버지", "ko_accept": ["아빠"]}, {"n": 2, "id": "0afc2f360f", "word": "わたし", "reading": "わたし", "en": ["I", "me"], "pos": ["pn"], "ko_primary": "나", "ko_accept": ["저"]}, {"n": 3, "id": "0872fdeb8f", "word": "顔", "reading": "かお", "en": ["face"], "pos": ["n"], "ko_primary": "얼굴", "ko_accept": []}, {"n": 4, "id": "c5936f318a", "word": "イヤホン", "reading": "イヤホン", "en": ["earphones"], "pos": ["n"], "ko_primary": "이어폰", "ko_accept": []}, {"n": 5, "id": "e386bd9952", "word": "ウーロン", "reading": "ウーロン", "en": ["oolong (tea)"], "pos": ["n"], "ko_primary": "우롱차", "ko_accept": ["우롱"]}, {"n": 6, "id": "39b28ab0e0", "word": "エアコン", "reading": "エアコン", "en": ["air conditioner"], "pos": ["n"], "ko_primary": "에어컨", "ko_accept": ["냉방기"]}, {"n": 7, "id": "99f12d685e", "word": "オムレツ", "reading": "オムレツ", "en": ["omelette"], "pos": ["n"], "ko_primary": "오믈렛", "ko_accept": []}, {"n": 8, "id": "7c4fd106a1", "word": "キー", "reading": "キー", "en": ["key"], "pos": ["n"], "ko_primary": "열쇠", "ko_accept": ["키"]}, {"n": 9, "id": "9eb55df604", "word": "スイス", "reading": "スイス", "en": ["Switzerland"], "pos": ["n"], "ko_primary": "스위스", "ko_accept": []}, {"n": 10, "id": "1406e4d32e", "word": "ソウル", "reading": "ソウル", "en": ["Seoul"], "pos": ["n"], "ko_primary": "서울", "ko_accept": []}, {"n": 11, "id": "a866997312", "word": "ツリー", "reading": "ツリー", "en": ["tree (e.g. Christmas tree)"], "pos": ["n"], "ko_primary": "트리", "ko_accept": ["크리스마스 트리", "크리스마스트리"]}, {"n": 12, "id": "cc3181b98d", "word": "ニート", "reading": "ニート", "en": ["NEET (not in education, employment or training)"], "pos": ["n"], "ko_primary": "니트족", "ko_accept": ["니트"]}, {"n": 13, "id": "a4394e5d50", "word": "カヌー", "reading": "カヌー", "en": ["canoe"], "pos": ["n"], "ko_primary": "카누", "ko_accept": []}, {"n": 14, "id": "80e3a99856", "word": "リスト", "reading": "リスト", "en": ["list"], "pos": ["n"], "ko_primary": "목록", "ko_accept": ["리스트", "명단"]}, {"n": 15, "id": "b921645383", "word": "アメリカ", "reading": "アメリカ", "en": ["America"], "pos": ["n"], "ko_primary": "미국", "ko_accept": ["아메리카"]}, {"n": 16, "id": "7db3da6e1b", "word": "雲", "reading": "くも", "en": ["cloud"], "pos": ["n"], "ko_primary": "구름", "ko_accept": []}, {"n": 17, "id": "8426193f36", "word": "ケーキ", "reading": "ケーキ", "en": ["cake"], "pos": ["n"], "ko_primary": "케이크", "ko_accept": ["케익"]}, {"n": 18, "id": "02dea2f4f6", "word": "テニス", "reading": "テニス", "en": ["tennis"], "pos": ["n"], "ko_primary": "테니스", "ko_accept": []}, {"n": 19, "id": "505c1fd62e", "word": "虫", "reading": "むし", "en": ["insect"], "pos": ["n"], "ko_primary": "벌레", "ko_accept": ["곤충"]}, {"n": 20, "id": "2a04aa688d", "word": "サイン", "reading": "サイン", "en": ["autograph", "sign", "sine"], "pos": ["n", "vs", "vt", "vi"], "ko_primary": "사인", "ko_accept": ["서명", "신호"]}, {"n": 21, "id": "b66409ed87", "word": "桜", "reading": "さくら", "en": ["cherry blossom", "cherry tree"], "pos": ["n"], "ko_primary": "벚꽃", "ko_accept": ["벚나무"]}, {"n": 22, "id": "7650278af2", "word": "酒", "reading": "さけ", "en": ["alcohol", "sake"], "pos": ["n"], "ko_primary": "술", "ko_accept": ["사케", "청주"]}, {"n": 23, "id": "4fbf3d9b7a", "word": "タオル", "reading": "タオル", "en": ["(hand) towel"], "pos": ["n"], "ko_primary": "수건", "ko_accept": ["타월", "타올"]}, {"n": 24, "id": "7864a376ed", "word": "チーム", "reading": "チーム", "en": ["team"], "pos": ["n"], "ko_primary": "팀", "ko_accept": []}, {"n": 25, "id": "9dda296d47", "word": "方", "reading": "ほう", "en": ["side"], "pos": ["n"], "ko_primary": "쪽", "ko_accept": ["방향", "편", "방면"]}, {"n": 26, "id": "f3143300d0", "word": "ミルク", "reading": "ミルク", "en": ["milk"], "pos": ["n"], "ko_primary": "우유", "ko_accept": ["밀크"]}, {"n": 27, "id": "c13f4ea321", "word": "メモ", "reading": "メモ", "en": ["memorandum"], "pos": ["n", "vs", "vt"], "ko_primary": "메모", "ko_accept": []}, {"n": 28, "id": "1e16b1d46a", "word": "スカーフ", "reading": "スカーフ", "en": ["scarf"], "pos": ["n"], "ko_primary": "스카프", "ko_accept": []}, {"n": 29, "id": "35d3365a8f", "word": "システム", "reading": "システム", "en": ["system"], "pos": ["n"], "ko_primary": "시스템", "ko_accept": ["체계"]}, {"n": 30, "id": "5fe5d25c22", "word": "セール", "reading": "セール", "en": ["sale"], "pos": ["n"], "ko_primary": "세일", "ko_accept": ["할인", "할인 판매"]}, {"n": 31, "id": "8d0e3e599c", "word": "タイヤ", "reading": "タイヤ", "en": ["tire", "tyre"], "pos": ["n"], "ko_primary": "타이어", "ko_accept": []}]

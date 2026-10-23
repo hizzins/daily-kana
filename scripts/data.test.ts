@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { type KoEntry, type SourceEntry, buildLevels, contentKey, gradingReading } from "./data";
+import { type KoEntry, type SourceEntry, buildLevels, contentKey, customId, gradingReading } from "./data";
 
 const src = (id: string, word: string, reading: string, meaning = id, other_readings: string[] | null = null): SourceEntry => ({
   id, word, reading, meanings: [meaning], other_readings,
@@ -133,6 +133,40 @@ describe("buildLevels", () => {
     expect(out.n4![0].homophones).toEqual([{ id: "a", word: "はし", ko_primary: "젓가락", ko_accept: [] }]);
   });
 
+  it("수정 항목 level 로 다른 레벨 단어를 옮기면 원본 id 그대로 그 레벨에 들어간다", () => {
+    const { out } = buildLevels({
+      sources: { n5: [src("a", "犬", "いぬ")], n3: [src("b", "桜", "さくら")] },
+      ko: { n5: { a: ko("개"), b: ko("벚꽃") } },
+      overrides: { b: { level: "n5" } },
+    });
+    expect(out.n5!.map((e) => e.id)).toEqual(["a", "b"]);
+    expect(out.n3).toBeUndefined();
+  });
+
+  it("옮겨 온 단어가 그 레벨의 같은 내용과 겹치면 중복으로 막는다", () => {
+    const { problems } = buildLevels({
+      sources: { n5: [src("a", "桜", "さくら", "cherry")], n3: [src("b", "桜", "さくら", "cherry")] },
+      ko: { n5: { a: ko("벚꽃"), b: ko("벚꽃") } },
+      overrides: { b: { level: "n5" } },
+    });
+    expect(problems.map((p) => p.kind)).toEqual(["duplicate"]);
+  });
+
+  it("수정 항목 other_readings 는 원천 다른 읽기에 더해지고 분할 검사도 받는다", () => {
+    const ok = buildLevels({
+      sources: { n5: [src("a", "私", "わたくし", "I")] },
+      ko: { n5: { a: ko("저") } },
+      overrides: { a: { other_readings: ["わたし"] } },
+    });
+    expect(ok.out.n5![0].other_readings).toEqual(["わたし"]);
+    const bad = buildLevels({
+      sources: { n5: [src("a", "私", "わたくし", "I")] },
+      ko: { n5: { a: ko("저") } },
+      overrides: { a: { other_readings: ["ゐ"] } },
+    });
+    expect(bad.problems.map((p) => p.kind)).toEqual(["unsplittable"]);
+  });
+
   it("외부 중복 문제(koDuplicates)를 그대로 싣는다", () => {
     const { problems } = buildLevels({
       sources: {}, ko: {}, overrides: {},
@@ -147,6 +181,9 @@ describe("도움 함수", () => {
     expect(gradingReading("～さん")).toBe("さん");
     expect(gradingReading("お～")).toBe("お");
     expect(gradingReading("ねこ")).toBe("ねこ");
+  });
+  it("customId 는 OpenJLPT 와 같은 방식(SHA-1(word + U+0000 + reading) 앞 10자리)", () => {
+    expect(customId("紙", "かみ")).toBe("cd08f9cdc2"); // OpenJLPT N5 紙 의 id
   });
   it("contentKey 는 표기·읽기·첫 영어 뜻", () => {
     expect(contentKey(src("a", "犬", "いぬ", "dog"))).toBe("犬|いぬ|dog");
