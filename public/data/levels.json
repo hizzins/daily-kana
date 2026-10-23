@@ -1,0 +1,27 @@
+{
+ "n5": {
+  "ready": true,
+  "kana": 50,
+  "kanji": 33
+ },
+ "n4": {
+  "ready": false,
+  "kana": 0,
+  "kanji": 0
+ },
+ "n3": {
+  "ready": false,
+  "kana": 0,
+  "kanji": 0
+ },
+ "n2": {
+  "ready": false,
+  "kana": 0,
+  "kanji": 0
+ },
+ "n1": {
+  "ready": false,
+  "kana": 0,
+  "kanji": 0
+ }
+}
