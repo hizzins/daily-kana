@@ -1,20 +1,25 @@
 import { useEffect, useRef, useState } from "react";
 import type { Screen } from "../App";
-import { type AppEntry, LEVELS, type Manifest, loadLevel, writeSetting } from "../data";
-import { type Card, type Level, type Mode, type ReviewDb, ImportError, isMastered, localDay, parseExport } from "../db";
+import { type AppEntry, LEVELS, type Manifest, type SentenceEntry, loadLevel, loadSentences, writeSetting } from "../data";
+import { type Card, type CardMode, type Level, type ReviewDb, ImportError, isMastered, localDay, parseExport } from "../db";
 import { mistakes, weeklyAccuracy } from "../quiz-logic";
 
+type Progress = { total: number; mastered: number; started: number };
 interface LevelStat {
   level: Level;
-  kana: { total: number; mastered: number; started: number };
-  kanji: { total: number; mastered: number; started: number };
+  label: string;
+  kana: Progress;
+  kanji: Progress;
 }
+
+type Shown = { kind: "word"; e: AppEntry } | { kind: "sentence"; e: SentenceEntry };
+const MODE_LABEL: Record<CardMode, string> = { kana: "가나", kanji: "한자", "s-kana": "문장 · 가나", "s-kanji": "문장 · 한자" };
 
 /** 레벨별 진도, 최근 7일 정답률, 오답 노트(다시 풀기), 내보내기/가져오기. */
 export default function Stats(props: { manifest: Manifest; db: ReviewDb; go: (s: Screen) => void }) {
   const { manifest, db, go } = props;
   const [cards, setCards] = useState<Card[] | null>(null);
-  const [entries, setEntries] = useState<Map<string, AppEntry>>(new Map());
+  const [entries, setEntries] = useState<Map<string, Shown>>(new Map());
   const [levels, setLevels] = useState<LevelStat[]>([]);
   const [message, setMessage] = useState("");
   const fileRef = useRef<HTMLInputElement>(null);
@@ -23,14 +28,23 @@ export default function Stats(props: { manifest: Manifest; db: ReviewDb; go: (s:
     const all = (await db.export()).cards;
     const ready = LEVELS.filter((l) => manifest[l]?.ready);
     const lists = await Promise.all(ready.map((l) => loadLevel(l)));
-    const map = new Map<string, AppEntry>();
-    lists.flat().forEach((e) => map.set(e.id, e));
-    const stat = (level: Level, mode: Mode, list: AppEntry[]) => {
-      const ids = new Set(list.filter((e) => mode === "kana" || e.kanji).map((e) => e.id));
+    const sentenceLists = await Promise.all(ready.map((l) => (manifest[l]?.sentences ? loadSentences(l) : [])));
+    const map = new Map<string, Shown>();
+    lists.flat().forEach((e) => map.set(e.id, { kind: "word", e }));
+    sentenceLists.flat().forEach((e) => map.set(e.id, { kind: "sentence", e }));
+    const stat = (level: Level, mode: CardMode, list: { id: string; kanji: boolean }[]): Progress => {
+      const ids = new Set(list.filter((e) => !mode.endsWith("kanji") || e.kanji).map((e) => e.id));
       const mine = all.filter((c) => c.level === level && c.mode === mode && ids.has(c.id));
       return { total: ids.size, mastered: mine.filter(isMastered).length, started: mine.length };
     };
-    setLevels(ready.map((level, i) => ({ level, kana: stat(level, "kana", lists[i]), kanji: stat(level, "kanji", lists[i]) })));
+    setLevels(
+      ready.flatMap((level, i) => [
+        { level, label: `${level.toUpperCase()} 단어`, kana: stat(level, "kana", lists[i]), kanji: stat(level, "kanji", lists[i]) },
+        ...(sentenceLists[i].length
+          ? [{ level, label: `${level.toUpperCase()} 문장`, kana: stat(level, "s-kana", sentenceLists[i]), kanji: stat(level, "s-kanji", sentenceLists[i]) }]
+          : []),
+      ]),
+    );
     setEntries(map);
     setCards(all);
   };
@@ -83,8 +97,8 @@ export default function Stats(props: { manifest: Manifest; db: ReviewDb; go: (s:
           <thead><tr><th>레벨</th><th>가나 익힘</th><th>한자 익힘</th></tr></thead>
           <tbody>
             {levels.map((l) => (
-              <tr key={l.level}>
-                <td>{l.level.toUpperCase()}</td>
+              <tr key={l.label}>
+                <td>{l.label}</td>
                 <td>{l.kana.mastered} / {l.kana.total} <span className="muted">(시작 {l.kana.started})</span></td>
                 <td>{l.kanji.mastered} / {l.kanji.total} <span className="muted">(시작 {l.kanji.started})</span></td>
               </tr>
@@ -99,17 +113,21 @@ export default function Stats(props: { manifest: Manifest; db: ReviewDb; go: (s:
         <h2>오답 노트</h2>
         {wrong.length === 0 && <p className="muted">틀린 단어가 없어요.</p>}
         {[...groups.entries()].map(([key, list]) => {
-          const [level, mode] = key.split(":") as [Level, Mode];
+          const [level, mode] = key.split(":") as [Level, CardMode];
+          const deck = mode.startsWith("s-") ? "sentence" : "word";
+          const view = mode.endsWith("kanji") ? "kanji" : "kana";
           return (
             <div key={key} className="group">
               <div className="group-head">
-                <strong>{level.toUpperCase()} · {mode === "kana" ? "가나" : "한자"}</strong> <span className="muted">{list.length}개</span>
-                <button onClick={() => go({ name: "quiz", level, mode, only: list.map((c) => c.id) })}>다시 풀기</button>
+                <strong>{level.toUpperCase()} · {MODE_LABEL[mode]}</strong> <span className="muted">{list.length}개</span>
+                <button onClick={() => go({ name: "quiz", level, deck, mode: view, only: list.map((c) => c.id) })}>다시 풀기</button>
               </div>
               <p className="wrong-list">
                 {list.slice(0, 40).map((c) => {
-                  const e = entries.get(c.id)!;
-                  return <span key={c.key} className="chip" lang="ja">{mode === "kanji" ? e.word : e.reading} <span className="muted" lang="ko">{e.ko_primary}</span></span>;
+                  const s = entries.get(c.id)!;
+                  if (s.kind === "sentence")
+                    return <span key={c.key} className="chip" lang="ja">{view === "kanji" && s.e.kanji ? s.e.ja : s.e.kana}</span>;
+                  return <span key={c.key} className="chip" lang="ja">{view === "kanji" ? s.e.word : s.e.reading} <span className="muted" lang="ko">{s.e.ko_primary}</span></span>;
                 })}
               </p>
             </div>

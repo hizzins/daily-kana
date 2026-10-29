@@ -20,6 +20,9 @@ export function readingTargets(e: AppEntry, mode: Mode): ReadingTarget[] {
   return [first, ...e.other_readings.map((r) => ({ kana: gradingReading(r) }))];
 }
 
+// 조사로 읽힐 때만 소리가 바뀌는 글자(pron 으로 바뀐 단위의 정답이 이 소리면 조사 설명을 붙인다).
+const PARTICLE_SOUND: Record<string, string> = { は: "와", へ: "에", を: "오" };
+
 const position = (i: number, total: number) => (total === 1 ? "" : i === 0 ? "첫 " : i === total - 1 ? "마지막 " : `${i + 1}번째 `);
 const label = (u: UnitResult) => `${u.kana}(${u.expected || "생략"})`;
 
@@ -33,6 +36,8 @@ export function explainUnits(r: ReadingResult): string[] {
     const card = r.confusions.find((c) => c.expected.kana === u.kana && c.got.hangul === u.got);
     if (card) lines.push(`${where}${label(u)}를 ${card.got.kana}(${card.got.hangul})로 읽었어. 두 글자는 모양이 비슷하지만 획이 달라.`);
     else if (!u.got) lines.push(`${where}${label(u)}를 빠뜨렸어.`);
+    else if (PARTICLE_SOUND[u.kana] === u.expected)
+      lines.push(`${where}${u.kana}는 조사라서 "${u.expected}"로 읽어. "${u.got}"가 아니야.`);
     else if (u.kind === "n") lines.push(`${where}ん은 앞 글자 받침(ㄴ·ㅇ·ㅁ)이나 "응"으로 써.`);
     else if (u.kind === "sokuon") lines.push(`${where}っ는 앞 글자 받침 ㅅ으로 써.`);
     else lines.push(`${where}${label(u)}를 "${u.got}"로 썼어.`);

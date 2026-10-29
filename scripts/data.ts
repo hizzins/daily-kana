@@ -1,6 +1,7 @@
 // 단어 데이터 파이프라인. OpenJLPT 원천 + 사용자 단어(data/source/custom.json) + Claude Code 가 만든 한국어 뜻(data/ko)
 // + 사람이 고친 항목(data/overrides.json)
 // → 앱이 레벨별로 지연 로드하는 public/data/<level>.json.
+// 문장(data/sentences/<level>.json, 지침 gen-sentences.prompt.md)도 같은 build 에서 검사해 <level>-sentences.json 으로.
 //
 //   npm run data -- fetch            원천을 고정 커밋에서 받고 해시를 SOURCE.json 에 기록
 //   npm run data -- verify           받아 둔 원천이 SOURCE.json 해시와 같은지 확인
@@ -11,6 +12,8 @@ import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 
 import { dirname, join } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { gradingReading, splitKana } from "../src/grade/reading";
+import type { SentenceEntry } from "../src/sentence";
+import { type RawSentence, buildSentences } from "./sentences";
 
 export { gradingReading };
 
@@ -26,6 +29,7 @@ const KO_DIR = join(ROOT, "data/ko");
 const OVERRIDES_FILE = join(ROOT, "data/overrides.json");
 const CUSTOM_FILE = join(ROOT, "data/source/custom.json");
 const OUT_DIR = join(ROOT, "public/data");
+const SENTENCE_DIR = join(ROOT, "data/sentences");
 const BATCH_DIR = join(ROOT, ".work/batches");
 
 export interface SourceEntry {
@@ -88,6 +92,7 @@ export const contentKey = (e: SourceEntry) => `${e.word}|${e.reading}|${e.meanin
 const KO_ALLOWED = /^[가-힣A-Za-z0-9 \-·]+$/;
 
 function splittable(kana: string): string | null {
+  if (/\s/.test(kana)) return "읽기에 공백"; // splitKana 는 공백을 문장 어절 경계로 받으므로 단어 읽기에선 따로 막는다
   try {
     splitKana(kana);
     return null;
@@ -351,15 +356,35 @@ function build(allowPartial: boolean): boolean {
     return false;
   }
 
-  const manifest: Record<string, { ready: boolean; kana: number; kanji: number }> = {};
+  // 문장은 그 레벨 단어 데이터로 문장 속 단어를 찾으므로 단어가 준비된 레벨만 만든다.
+  const sentences: Partial<Record<Level, SentenceEntry[]>> = {};
+  let sentenceProblems = 0;
+  for (const level of LEVELS) {
+    const path = join(SENTENCE_DIR, `${level}.json`);
+    if (!existsSync(path) || !out[level]) continue;
+    const r = buildSentences(readJson<RawSentence[]>(path), out[level]!);
+    for (const p of r.problems) console.error(`  [sentence] ${level} #${p.n} ${p.ja} ${p.detail}`);
+    sentenceProblems += r.problems.length;
+    sentences[level] = r.out;
+  }
+  if (sentenceProblems) {
+    console.error(`문장 문제 ${sentenceProblems}개 — 아무것도 쓰지 않음`);
+    return false;
+  }
+
+  const manifest: Record<string, { ready: boolean; kana: number; kanji: number; sentences: number }> = {};
   for (const level of LEVELS) {
     const list = out[level];
-    manifest[level] = { ready: !!list, kana: list?.length ?? 0, kanji: list?.filter((e) => e.kanji).length ?? 0 };
+    const sent = sentences[level];
+    manifest[level] = {
+      ready: !!list, kana: list?.length ?? 0, kanji: list?.filter((e) => e.kanji).length ?? 0, sentences: sent?.length ?? 0,
+    };
     if (list) writeJson(join(OUT_DIR, `${level}.json`), list, false);
+    if (sent) writeJson(join(OUT_DIR, `${level}-sentences.json`), sent, false);
   }
   writeJson(join(OUT_DIR, "levels.json"), manifest);
   for (const [level, m] of Object.entries(manifest))
-    console.log(`${level}: ${m.ready ? `가나 ${m.kana} · 한자 ${m.kanji}` : "준비 중"}`);
+    console.log(`${level}: ${m.ready ? `가나 ${m.kana} · 한자 ${m.kanji} · 문장 ${m.sentences}` : "준비 중"}`);
   return true;
 }
 

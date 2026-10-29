@@ -43,6 +43,10 @@ describe("틀린 단위 설명", () => {
   it("っ·ん 규칙 안내", () => {
     expect(explainUnits(g("がっこう", "각코"))[0]).toContain("っ는 앞 글자 받침 ㅅ");
   });
+  it("조사 は·へ·を 는 조사 소리를 짚는다", () => {
+    const r = gradeReading([{ kana: "わたしわ", shown: "わたしは" }], "와타시하", "kana");
+    expect(explainUnits(r)).toEqual(['마지막 は는 조사라서 "와"로 읽어. "하"가 아니야.']);
+  });
   it("그 밖의 소리 오류", () => expect(explainUnits(g("か", "가"))).toEqual(['か(카)를 "가"로 썼어.']));
   it("맞으면 설명 없음", () => expect(explainUnits(g("か", "카"))).toEqual([]));
   it("단위는 다 맞았는데 글자가 남으면", () => {

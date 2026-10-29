@@ -159,6 +159,10 @@ describe("pron 예외 (D3)", () => {
     expect(r.units[r.units.length - 1]).toMatchObject({ kana: "は", expected: "와" });
   });
   it("pron 이 없으면 はな 를 와나로 쓰면 오답", () => expect(kana("はな", "와나").correct).toBe(false));
+  it("공백은 단어 경계 — 단위를 만들지 않고 장음을 잇지 않는다", () => {
+    expect(splitKana("わ あめ").map((u) => [u.text, u.kind])).toEqual([["わ", "mora"], ["あ", "mora"], ["め", "mora"]]);
+    expect(splitKana("わあめ").map((u) => u.kind)).toEqual(["mora", "long", "mora"]);
+  });
   it("shown 길이가 다르면 오류", () => expect(() => splitKana("こんにちわ", "こんにちは!")).toThrow());
 });
 

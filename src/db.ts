@@ -5,7 +5,12 @@
 import type { MeaningVerdict } from "./grade/meaning";
 
 export type Level = "n5" | "n4" | "n3" | "n2" | "n1";
-export type Mode = "kana" | "kanji";
+export type Mode = "kana" | "kanji"; // 보기 모드
+export type Deck = "word" | "sentence";
+/** 카드 종류. 단어는 보기 모드 그대로, 문장은 s- 를 붙여 단어와 상자·진도를 따로 둔다. */
+export type CardMode = Mode | "s-kana" | "s-kanji";
+export const CARD_MODES: CardMode[] = ["kana", "kanji", "s-kana", "s-kanji"];
+export const cardMode = (deck: Deck, mode: Mode): CardMode => (deck === "sentence" ? `s-${mode}` : mode);
 
 // TalkBuddy 단어장과 같은 간격. 상자 0 = 새 단어, 맞힐 때마다 한 칸 위로 → 복습 간격이 길어진다.
 export const INTERVAL_DAYS = [0, 1, 2, 4, 7, 15];
@@ -23,7 +28,7 @@ export interface Card {
   key: string; // `${id}:${mode}` — 가나 모드와 한자 모드는 다른 기술이라 상자를 따로 둔다(D8)
   id: string;
   level: Level;
-  mode: Mode;
+  mode: CardMode;
   box: number;
   due: string; // YYYY-MM-DD(기기 로컬 날짜)
   added: string; // 처음 푼 날 — 하루 새 카드 수를 셀 때 쓴다
@@ -40,9 +45,9 @@ export interface UnitStat {
 export interface AnswerInput {
   id: string;
   level: Level;
-  mode: Mode;
+  mode: CardMode;
   reading: boolean; // 발음 채점 결과
-  meaning: MeaningVerdict; // 뜻 채점 결과(✓/△/✗)
+  meaning: MeaningVerdict; // 뜻 채점 결과(✓/△/✗). 문장은 뜻을 묻지 않아 늘 correct
   units?: { kana: string; ok: boolean }[]; // 발음 단위 결과, 가나 모드만 집계한다
 }
 
@@ -60,7 +65,7 @@ export function addDays(day: string, n: number): string {
 
 // ---------- 상자 규칙 ----------
 
-export const cardKey = (id: string, mode: Mode) => `${id}:${mode}`;
+export const cardKey = (id: string, mode: CardMode) => `${id}:${mode}`;
 
 /**
  * 답 하나를 반영한 다음 카드. 발음 ✓·뜻 ✓ → 한 칸 위, 발음 ✗ 또는 뜻 ✗ → 1번 상자(오늘 다시),
@@ -140,7 +145,7 @@ export function parseExport(text: string): ExportData {
   if (!Array.isArray(d.cards) || !Array.isArray(d.units)) throw new ImportError("cards·units 가 없습니다");
   for (const c of d.cards)
     if (
-      typeof c?.key !== "string" || typeof c.id !== "string" || (c.mode !== "kana" && c.mode !== "kanji") ||
+      typeof c?.key !== "string" || typeof c.id !== "string" || !CARD_MODES.includes(c.mode) ||
       typeof c.box !== "number" || typeof c.due !== "string" || !Array.isArray(c.history)
     )
       throw new ImportError("카드 형식이 올바르지 않습니다");
@@ -201,7 +206,7 @@ export class ReviewDb {
   }
 
   /** 이 레벨·모드의 카드 전부(id → 카드). 세션 만들기와 진도 계산에 쓴다. */
-  async cards(level: Level, mode: Mode): Promise<Map<string, Card>> {
+  async cards(level: Level, mode: CardMode): Promise<Map<string, Card>> {
     const tx = this.db.transaction(CARDS, "readonly");
     const range = IDBKeyRange.bound([level, mode, ""], [level, mode, "￿"]);
     const list = await req(tx.objectStore(CARDS).index(BY_LEVEL_MODE_DUE).getAll(range) as IDBRequest<Card[]>);
@@ -209,7 +214,7 @@ export class ReviewDb {
   }
 
   /** 오늘 복습할 카드 수(레벨 선택 화면). 인덱스 범위로 세어 전체를 읽지 않는다. */
-  dueCount(level: Level, mode: Mode, today: string): Promise<number> {
+  dueCount(level: Level, mode: CardMode, today: string): Promise<number> {
     const tx = this.db.transaction(CARDS, "readonly");
     const range = IDBKeyRange.bound([level, mode, ""], [level, mode, today]);
     return req(tx.objectStore(CARDS).index(BY_LEVEL_MODE_DUE).count(range));

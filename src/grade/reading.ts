@@ -71,21 +71,25 @@ function longUnit(text: string, key: string, prev: Vowel | null, literal: string
  * 가나 읽기를 채점 단위로 쪼갠다. 요음·외래어 작은 모음 조합은 한 단위, っ·ん·장음은 각자 한 단위.
  * shown 은 화면에 보일 원문(같은 길이). pron 예외 단어(こんにちわ)를 원문(こんにちは)으로 보여줄 때 쓴다.
  * 규칙표로 나눌 수 없는 글자가 있으면 UnknownKanaError — data.ts 의 읽기 완전 분할 검사가 이걸 쓴다.
+ * 공백은 단어 경계(문장): 단위를 만들지 않고, 경계 너머 앞 글자와는 장음·요음으로 잇지 않는다(あしたは あめ 의 あ 는 장음이 아님).
  */
 export function splitKana(kana: string, shown: string = kana): Unit[] {
   const chars = Array.from(kana);
   const shownChars = Array.from(shown);
   if (shownChars.length !== chars.length) throw new Error(`shown 길이가 다름: ${kana} / ${shown}`);
   const units: Unit[] = [];
+  let wordStart = 0; // 이번 단어의 첫 단위 위치
   const lastMora = () => {
-    const u = units[units.length - 1];
+    const u = units.length > wordStart ? units[units.length - 1] : undefined;
     return u?.kind === "mora" ? u : undefined;
   };
 
   chars.forEach((c, i) => {
     const h = toHiragana(c);
     const text = shownChars[i];
-    if (isSmallKana(h)) {
+    if (c === " ") {
+      wordStart = units.length;
+    } else if (isSmallKana(h)) {
       const prev = lastMora();
       if (!prev) throw new UnknownKanaError(text, i);
       units[units.length - 1] = moraUnit(prev.text + text, prev.key + h, i);

@@ -2,26 +2,31 @@
  "n5": {
   "ready": true,
   "kana": 705,
-  "kanji": 506
+  "kanji": 506,
+  "sentences": 100
  },
  "n4": {
   "ready": false,
   "kana": 0,
-  "kanji": 0
+  "kanji": 0,
+  "sentences": 0
  },
  "n3": {
   "ready": false,
   "kana": 0,
-  "kanji": 0
+  "kanji": 0,
+  "sentences": 0
  },
  "n2": {
   "ready": false,
   "kana": 0,
-  "kanji": 0
+  "kanji": 0,
+  "sentences": 0
  },
  "n1": {
   "ready": false,
   "kana": 0,
-  "kanji": 0
+  "kanji": 0,
+  "sentences": 0
  }
 }

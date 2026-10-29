@@ -90,12 +90,17 @@ describe("오늘 풀 목록", () => {
 describe("내보내기 파일 검사", () => {
   const ok = { app: "daily-kana", version: 1, exportedAt: "x", cards: [card({})], units: [] };
   it("올바른 파일", () => expect(parseExport(JSON.stringify(ok)).cards).toHaveLength(1));
+  it("문장 카드(s-kana·s-kanji)도 받는다", () => {
+    const cards = [card({ mode: "s-kana", key: "s-1:s-kana" }), card({ mode: "s-kanji", key: "s-1:s-kanji" })];
+    expect(parseExport(JSON.stringify({ ...ok, cards })).cards).toHaveLength(2);
+  });
   it.each([
     ["JSON 아님", "{"],
     ["다른 앱", JSON.stringify({ ...ok, app: "talkbuddy" })],
     ["버전 다름", JSON.stringify({ ...ok, version: 2 })],
     ["cards 없음", JSON.stringify({ ...ok, cards: undefined })],
     ["카드 형식", JSON.stringify({ ...ok, cards: [{ key: "x" }] })],
+    ["모르는 모드", JSON.stringify({ ...ok, cards: [card({ mode: "audio" as never })] })],
   ])("%s → ImportError", (_, text) => expect(() => parseExport(text)).toThrow(ImportError));
 });
 

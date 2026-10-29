@@ -1,0 +1,48 @@
+You are reviewing Japanese reading-practice sentences for a JLPT N5 quiz app for Korean learners. The app shows `ja` (kanji view) or `kana` (kana view, spaces between bunsetsu), the learner types the pronunciation in Hangul, and it is graded against `pron` (same as kana but particle は→わ, へ→え, を→お as actually pronounced). `ko` is a Korean translation shown after answering (not graded). `words` lists N5 dictionary-form headwords used (shown as a vocabulary list); `words` is validated by script to exist in N5 data, so only judge whether they match the sentence.
+
+Judge EACH item against the generation guideline below:
+(a) reading_wrong: does `kana` NOT match the standard reading of `ja`? (wrong kana, wrong kanji reading in context, wrong number reading) Give the corrected kana.
+(b) pron_wrong: is any particle pronunciation in `pron` wrong (a particle は/へ/を not converted, or a non-particle converted)?
+(c) unnatural: is `ja` ungrammatical or unnatural Japanese?
+(d) not_n5: does it use vocabulary or grammar clearly beyond N5? Name it.
+(e) ko_wrong: is `ko` an incorrect or misleading translation? Give a better one.
+(f) words_wrong: is a listed word not actually the one used in the sentence (wrong headword/sense)?
+(g) spacing: is the bunsetsu spacing in `kana` clearly wrong (particle separated from its word, word split)?
+Add a short Korean note (max 80 chars) only when something is flagged.
+
+Do not read or modify any files. Do not run tools. Answer directly.
+Output ONLY a JSON array, one object per item, in input order:
+{"n":<n>,"reading_wrong":bool,"kana_fix":"","pron_wrong":bool,"unnatural":bool,"not_n5":"","ko_wrong":bool,"ko_fix":"","words_wrong":bool,"spacing":bool,"note":""}
+
+GENERATION GUIDELINE:
+# 문장 생성 지침 (gen-sentences.prompt.md) v1
+
+레벨별 읽기 연습 문장을 만든다. 앱은 문장을 보여 주고 **한글 발음만** 채점한다(뜻 입력 없음).
+결과 화면에서 번역·문장 속 단어·듣기(기기 일본어 음성)를 보여 준다.
+
+## 항목 형식 (`data/sentences/<level>.json`)
+
+```json
+{ "ja": "私は学生です。", "kana": "わたしは がくせいです。", "ko": "저는 학생입니다.", "words": ["私", "学生"] }
+```
+
+- `ja`: 한자 보기에서 보이는 문장. 그 레벨에서 흔히 한자로 쓰는 말만 한자로 쓴다. 숫자는 한자(三時)로 쓴다 — 아라비아 숫자 금지.
+- `kana`: 가나 보기에서 보이는 문장이자 채점 기준. **어절(문절)마다 공백 하나**로 띄운다(교과서식 わたしは がくせいです。).
+  조사는 앞 말에 붙인다. 외래어는 가타카나 그대로. 문장부호는 。、？ 만 쓴다.
+- `pron`(선택): 자동 규칙이 틀릴 때만 쓴다. `kana`와 같은 문자열에서 실제 발음만 바꾼 것.
+  자동 규칙 — を는 항상 お, 어절 끝의 は는 わ, 어절 끝의 へ는 え(はなは → はなわ, がっこうへ → がっこうえ).
+- `ko`: 자연스러운 한국어 번역 하나(채점에 안 쓰고 보여 주기만 한다).
+- `words`: 문장에 나온 **내용어의 사전형 표제어**(그 레벨 단어 데이터의 word). 활용형이 아니라 사전형(行きます → 行く).
+  조사·조동사·です/ます는 넣지 않는다. 같은 표기 단어가 둘이면 `"word:reading"`으로 쓴다.
+
+## 내용
+
+- 그 레벨 어휘·문법만 쓴다(N5: です/ます, ました/ません, て形·てください·ています, たい, ましょう, でしょう, ～から·ので, 형용사 활용, あります/います, 기본 조사).
+- 한 문장 3~6어절. 일상에서 실제로 쓸 말. 같은 문형만 반복하지 않는다.
+- 사람 이름·지명 등 고유명사는 쓰지 않는다(그 레벨 단어로 대신한다).
+- 읽기가 둘 이상인 한자 표기(家 いえ/うち, 方 ほう/かた)는 문맥상 자연스러운 읽기를 `kana`에 쓴다.
+
+ITEMS:
+{"n": 37, "ja": "春は花がたくさん咲きます。", "kana": "はるは はなが たくさん さきます。", "pron": "はるわ はなが たくさん さきます。", "ko": "봄에는 꽃이 많이 핍니다.", "words": ["春(はる)", "花(はな)", "たくさん(たくさん)", "咲く(さく)"]}
+{"n": 63, "ja": "次の角を右へ曲がってください。", "kana": "つぎの かどを みぎへ まがって ください。", "pron": "つぎの かどお みぎえ まがって ください。", "ko": "다음 모퉁이에서 오른쪽으로 돌아 주세요.", "words": ["次(つぎ)", "角(かど)", "右(みぎ)", "曲がる(まがる)", "ください(ください)"]}
+{"n": 73, "ja": "宿題はもう終わりましたか。", "kana": "しゅくだいは もう おわりましたか。", "pron": "しゅくだいわ もう おわりましたか。", "ko": "숙제는 벌써 끝났습니까?", "words": ["宿題(しゅくだい)", "もう(もう)", "終わる(おわる)"]}

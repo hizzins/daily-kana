@@ -1,10 +1,11 @@
 // 앱 데이터(public/data) 불러오기. build 가 만든 레벨별 JSON 을 필요할 때 한 번만 받는다.
 import type { AppEntry } from "../scripts/data";
 import type { Level } from "./db";
+import type { SentenceEntry } from "./sentence";
 
-export type { AppEntry };
+export type { AppEntry, SentenceEntry };
 export const LEVELS: Level[] = ["n5", "n4", "n3", "n2", "n1"];
-export type Manifest = Record<Level, { ready: boolean; kana: number; kanji: number }>;
+export type Manifest = Record<Level, { ready: boolean; kana: number; kanji: number; sentences?: number }>;
 
 const url = (path: string) => `${import.meta.env.BASE_URL}data/${path}`;
 
@@ -20,6 +21,12 @@ const cache = new Map<Level, Promise<AppEntry[]>>();
 export function loadLevel(level: Level): Promise<AppEntry[]> {
   if (!cache.has(level)) cache.set(level, getJson<AppEntry[]>(`${level}.json`));
   return cache.get(level)!;
+}
+
+const sentenceCache = new Map<Level, Promise<SentenceEntry[]>>();
+export function loadSentences(level: Level): Promise<SentenceEntry[]> {
+  if (!sentenceCache.has(level)) sentenceCache.set(level, getJson<SentenceEntry[]>(`${level}-sentences.json`));
+  return sentenceCache.get(level)!;
 }
 
 // 설정은 이 기기 브라우저에만(localStorage). 사생활 모드 등에서 실패하면 기본값으로 동작한다.
