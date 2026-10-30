@@ -5,6 +5,7 @@ import About from "./screens/About";
 import Home from "./screens/Home";
 import Quiz from "./screens/Quiz";
 import Stats from "./screens/Stats";
+import { type StorageEnv, detectStorage } from "./storage-guard";
 
 export type Screen =
   | { name: "home" }
@@ -29,9 +30,14 @@ export default function App() {
     newPerDay: readSetting("newPerDay", DEFAULT_NEW_PER_DAY),
   }));
 
+  const [storage, setStorage] = useState<StorageEnv | null>(null);
+
   useEffect(() => {
     loadManifest().then(setManifest, (e) => setError(`단어 목록을 불러오지 못했어요: ${e.message}`));
     ReviewDb.open().then(setDb, (e) => setError(`기록 저장소를 열지 못했어요: ${e.message}`));
+    if (readSetting<string | null>("firstSeen", null) === null) writeSetting("firstSeen", new Date().toISOString());
+    // 안내만 늦게 뜰 뿐 공부는 막지 않는다
+    detectStorage().then(setStorage, () => setStorage({ persist: "unsupported", ios: false, standalone: false }));
   }, []);
 
   const setSettings = (s: Settings) => {
@@ -51,12 +57,14 @@ export default function App() {
 
   return (
     <main className="page">
-      {screen.name === "home" && <Home manifest={manifest} db={db} settings={settings} onSettings={setSettings} go={go} />}
+      {screen.name === "home" && (
+        <Home manifest={manifest} db={db} storage={storage} settings={settings} onSettings={setSettings} go={go} />
+      )}
       {screen.name === "quiz" && (
         <Quiz key={`${screen.level}:${screen.deck}:${screen.mode}:${screen.only?.join(",") ?? ""}`} db={db} level={screen.level}
           deck={screen.deck} mode={screen.mode} only={screen.only} newPerDay={settings.newPerDay} go={go} />
       )}
-      {screen.name === "stats" && <Stats manifest={manifest} db={db} go={go} />}
+      {screen.name === "stats" && <Stats manifest={manifest} db={db} storage={storage} go={go} />}
       {screen.name === "about" && <About go={go} />}
     </main>
   );

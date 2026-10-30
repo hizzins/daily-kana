@@ -144,6 +144,7 @@ describe("ReviewDb (fake-indexeddb)", () => {
     expect(await db.dueCount("n5", "kana", "2026-10-23")).toBe(1);
     expect(await db.dueCount("n5", "kana", "2026-10-24")).toBe(2);
     expect(await db.dueCount("n5", "kanji", "2026-10-24")).toBe(0);
+    expect(await db.cardCount()).toBe(2);
     db.close();
   });
 

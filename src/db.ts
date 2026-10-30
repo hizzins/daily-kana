@@ -220,6 +220,11 @@ export class ReviewDb {
     return req(tx.objectStore(CARDS).index(BY_LEVEL_MODE_DUE).count(range));
   }
 
+  /** 카드 수(보존 안내에서 기록이 있는지 볼 때). */
+  cardCount(): Promise<number> {
+    return req(this.db.transaction(CARDS, "readonly").objectStore(CARDS).count());
+  }
+
   /** 답 하나를 카드와 가나 단위 누적에 한 트랜잭션으로 기록한다. 실패하면 StorageError. */
   async record(input: AnswerInput, now: Date = new Date()): Promise<Card> {
     try {

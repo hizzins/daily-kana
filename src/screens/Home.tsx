@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import type { Screen, Settings } from "../App";
-import { LEVELS, type Manifest, loadLevel, loadSentences } from "../data";
+import { LEVELS, type Manifest, loadLevel, loadSentences, readSetting, writeSetting } from "../data";
 import { type Level, type ReviewDb, cardMode, isMastered, localDay } from "../db";
+import { type Notice, type StorageEnv, homeNotice } from "../storage-guard";
 
 interface Row {
   level: Level;
@@ -15,14 +16,33 @@ interface Row {
 export default function Home(props: {
   manifest: Manifest;
   db: ReviewDb;
+  storage: StorageEnv | null;
   settings: Settings;
   onSettings: (s: Settings) => void;
   go: (s: Screen) => void;
 }) {
-  const { manifest, db, settings, onSettings, go } = props;
+  const { manifest, db, storage, settings, onSettings, go } = props;
   const { deck, mode } = settings;
   const isReady = (level: Level) => !!manifest[level]?.ready && (deck === "word" || !!manifest[level]?.sentences);
   const [rows, setRows] = useState<Row[] | null>(null);
+  const [notice, setNotice] = useState<Notice | null>(null);
+
+  useEffect(() => {
+    if (!storage) return;
+    let alive = true;
+    db.cardCount().then(
+      (n) => alive && setNotice(homeNotice(storage, n > 0, readSetting("storageNoticeDismissed", false))),
+      () => {},
+    );
+    return () => {
+      alive = false;
+    };
+  }, [db, storage]);
+
+  const dismiss = () => {
+    writeSetting("storageNoticeDismissed", true);
+    setNotice(null);
+  };
 
   useEffect(() => {
     let alive = true;
@@ -54,6 +74,8 @@ export default function Home(props: {
           <button className="link" onClick={() => go({ name: "about" })}>정보</button>
         </nav>
       </header>
+
+      {notice && storage && <StorageNotice notice={notice} standalone={storage.standalone} onDismiss={dismiss} go={go} />}
 
       <div className="segmented" role="radiogroup" aria-label="문제 종류">
         {(["word", "sentence"] as const).map((d) => (
@@ -101,5 +123,41 @@ export default function Home(props: {
         </select>
       </label>
     </>
+  );
+}
+
+function StorageNotice(props: { notice: Notice; standalone: boolean; onDismiss: () => void; go: (s: Screen) => void }) {
+  const { notice, standalone, onDismiss, go } = props;
+  if (notice === "ios-install")
+    return (
+      <section className="banner warn" role="note">
+        <strong>아이폰은 홈 화면에 추가해서 쓰세요</strong>
+        <p>Safari 아래 공유 버튼 → "홈 화면에 추가"를 누른 뒤 홈 화면 아이콘으로 열어 공부하세요.
+          Safari에서 쌓은 기록은 홈 화면 앱으로 넘어가지 않아요.</p>
+        <div className="actions"><button onClick={onDismiss}>Safari에서 계속하기</button></div>
+      </section>
+    );
+  if (notice === "ios-move")
+    return (
+      <section className="banner warn" role="note">
+        <strong>Safari에 쌓인 기록을 홈 화면 앱으로 옮기세요</strong>
+        <ol className="plain">
+          <li>통계 → 내보내기로 기록 파일을 저장</li>
+          <li>Safari 공유 버튼 → "홈 화면에 추가"</li>
+          <li>홈 화면 앱에서 통계 → 가져오기로 그 파일을 선택</li>
+        </ol>
+        <div className="actions">
+          <button className="primary" onClick={() => go({ name: "stats" })}>통계로 가기</button>
+          <button onClick={onDismiss}>다시 보지 않기</button>
+        </div>
+      </section>
+    );
+  return (
+    <section className="banner warn" role="note">
+      <strong>이 브라우저는 기록을 오래 보관한다고 약속하지 않았어요</strong>
+      <p>저장 공간이 모자라면 브라우저가 기록을 지울 수 있어요.
+        {standalone ? " 가끔 통계 → 내보내기로 백업해 두세요." : " 홈 화면에 설치해서 쓰거나, 가끔 통계 → 내보내기로 백업해 두세요."}</p>
+      <div className="actions"><button onClick={onDismiss}>확인</button></div>
+    </section>
   );
 }

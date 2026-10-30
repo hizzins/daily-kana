@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import type { Screen } from "../App";
-import { type AppEntry, LEVELS, type Manifest, type SentenceEntry, loadLevel, loadSentences, writeSetting } from "../data";
+import { type AppEntry, LEVELS, type Manifest, type SentenceEntry, loadLevel, loadSentences, readSetting, writeSetting } from "../data";
 import { type Card, type CardMode, type Level, type ReviewDb, ImportError, isMastered, localDay, parseExport } from "../db";
 import { mistakes, weeklyAccuracy } from "../quiz-logic";
+import { EXPORT_REMIND_DAYS, type StorageEnv, needsExportReminder } from "../storage-guard";
 
 type Progress = { total: number; mastered: number; started: number };
 interface LevelStat {
@@ -16,8 +17,9 @@ type Shown = { kind: "word"; e: AppEntry } | { kind: "sentence"; e: SentenceEntr
 const MODE_LABEL: Record<CardMode, string> = { kana: "가나", kanji: "한자", "s-kana": "문장 · 가나", "s-kanji": "문장 · 한자" };
 
 /** 레벨별 진도, 최근 7일 정답률, 오답 노트(다시 풀기), 내보내기/가져오기. */
-export default function Stats(props: { manifest: Manifest; db: ReviewDb; go: (s: Screen) => void }) {
-  const { manifest, db, go } = props;
+export default function Stats(props: { manifest: Manifest; db: ReviewDb; storage: StorageEnv | null; go: (s: Screen) => void }) {
+  const { manifest, db, storage, go } = props;
+  const [lastExport, setLastExport] = useState(() => readSetting<string | null>("lastExport", null));
   const [cards, setCards] = useState<Card[] | null>(null);
   const [entries, setEntries] = useState<Map<string, Shown>>(new Map());
   const [levels, setLevels] = useState<LevelStat[]>([]);
@@ -62,7 +64,9 @@ export default function Stats(props: { manifest: Manifest; db: ReviewDb; go: (s:
     a.download = `daily-kana-${localDay()}.json`;
     a.click();
     URL.revokeObjectURL(url);
-    writeSetting("lastExport", new Date().toISOString());
+    const at = new Date().toISOString();
+    writeSetting("lastExport", at);
+    setLastExport(at);
     setMessage(`카드 ${data.cards.length}개를 내보냈어요.`);
   };
 
@@ -83,6 +87,7 @@ export default function Stats(props: { manifest: Manifest; db: ReviewDb; go: (s:
   const wrong = mistakes(cards).filter((c) => entries.has(c.id));
   const groups = new Map<string, Card[]>();
   for (const c of wrong) groups.set(`${c.level}:${c.mode}`, [...(groups.get(`${c.level}:${c.mode}`) ?? []), c]);
+  const remind = !!storage && needsExportReminder(storage, cards.length > 0, lastExport ?? readSetting<string | null>("firstSeen", null));
 
   return (
     <>
@@ -90,6 +95,13 @@ export default function Stats(props: { manifest: Manifest; db: ReviewDb; go: (s:
         <button className="link" onClick={() => go({ name: "home" })}>← 레벨</button>
         <h1>통계</h1>
       </header>
+
+      {remind && (
+        <section className="banner warn" role="note">
+          <p>{lastExport ? `마지막 백업 후 ${EXPORT_REMIND_DAYS}일이 지났어요.` : "아직 기록을 백업한 적이 없어요."} 이 브라우저는 기록을 오래 보관한다고 약속하지 않아서, 내보내기로 파일을 남겨 두면 안전해요.</p>
+          <div className="actions"><button className="primary" onClick={() => void exportFile()}>지금 내보내기</button></div>
+        </section>
+      )}
 
       <section className="card">
         <h2>진도</h2>
