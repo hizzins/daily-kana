@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import type { Screen, Settings } from "../App";
-import { LEVELS, type Manifest, loadLevel, loadSentences, readSetting, writeSetting } from "../data";
+import { LEVELS, type Manifest, OFFLINE_HINT, loadLevel, loadSentences, readSetting, writeSetting } from "../data";
 import { type Level, type ReviewDb, cardMode, isMastered, localDay } from "../db";
 import { type Notice, type StorageEnv, homeNotice } from "../storage-guard";
 
 interface Row {
   level: Level;
   ready: boolean;
+  offline?: boolean; // 데이터를 못 받음(오프라인에서 처음 여는 레벨)
   total: number;
   mastered: number;
   due: number;
@@ -47,16 +48,21 @@ export default function Home(props: {
   useEffect(() => {
     let alive = true;
     const today = localDay();
+    setRows(null); // 단어/문장을 바꾸면 이전 숫자를 남기지 않는다
     Promise.all(
       LEVELS.map(async (level): Promise<Row> => {
         if (!isReady(level)) return { level, ready: false, total: 0, mastered: 0, due: 0 };
         const cm = cardMode(deck, mode);
-        const [cards, due, entries] = await Promise.all([
-          db.cards(level, cm), db.dueCount(level, cm, today), deck === "word" ? loadLevel(level) : loadSentences(level),
-        ]);
-        const ids = new Set<string>(entries.filter((e) => mode === "kana" || e.kanji).map((e) => e.id));
-        const mastered = [...cards.values()].filter((c) => ids.has(c.id) && isMastered(c)).length;
-        return { level, ready: true, total: ids.size, mastered, due };
+        try {
+          const [cards, due, entries] = await Promise.all([
+            db.cards(level, cm), db.dueCount(level, cm, today), deck === "word" ? loadLevel(level) : loadSentences(level),
+          ]);
+          const ids = new Set<string>(entries.filter((e) => mode === "kana" || e.kanji).map((e) => e.id));
+          const mastered = [...cards.values()].filter((c) => ids.has(c.id) && isMastered(c)).length;
+          return { level, ready: true, total: ids.size, mastered, due };
+        } catch {
+          return { level, ready: false, offline: true, total: 0, mastered: 0, due: 0 };
+        }
       }),
     ).then((r) => alive && setRows(r));
     return () => {
@@ -96,7 +102,7 @@ export default function Home(props: {
       </div>
 
       <ul className="levels">
-        {(rows ?? LEVELS.map((level) => ({ level, ready: isReady(level), total: 0, mastered: 0, due: 0 }))).map((r) => (
+        {(rows ?? LEVELS.map((level): Row => ({ level, ready: isReady(level), total: 0, mastered: 0, due: 0 }))).map((r) => (
           <li key={r.level}>
             <button className="level" disabled={!r.ready} onClick={() => go({ name: "quiz", level: r.level, deck, mode })}>
               <span className="level-name">{r.level.toUpperCase()}</span>
@@ -109,12 +115,14 @@ export default function Home(props: {
                   </span>
                 </>
               ) : (
-                <span className="muted">준비 중</span>
+                <span className="muted">{r.offline ? "오프라인이라 열 수 없어요" : "준비 중"}</span>
               )}
             </button>
           </li>
         ))}
       </ul>
+
+      {rows?.some((r) => r.offline) && <p className="muted">{OFFLINE_HINT}</p>}
 
       <label className="setting">
         하루 새 {deck === "word" ? "단어" : "문장"}

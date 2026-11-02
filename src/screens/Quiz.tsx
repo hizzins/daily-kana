@@ -1,6 +1,6 @@
 import { type KeyboardEvent, useEffect, useRef, useState } from "react";
 import type { Screen } from "../App";
-import { type AppEntry, type SentenceEntry, loadLevel, loadSentences } from "../data";
+import { type AppEntry, OFFLINE_HINT, type SentenceEntry, loadLevel, loadSentences } from "../data";
 import { type Deck, type Level, type Mode, type ReviewDb, StorageError, buildSession, cardMode, localDay } from "../db";
 import { type MeaningResult, gradeMeaning } from "../grade/meaning";
 import { type ReadingResult, gradeReading } from "../grade/reading";
@@ -40,6 +40,7 @@ export default function Quiz(props: {
   const [meaningInput, setMeaningInput] = useState("");
   const [graded, setGraded] = useState<Graded | null>(null);
   const [saveError, setSaveError] = useState<StorageError | null>(null);
+  const [loadError, setLoadError] = useState(false);
   const [tally, setTally] = useState({ done: 0, correct: 0 });
   const readingRef = useRef<HTMLInputElement>(null);
   const meaningRef = useRef<HTMLInputElement>(null);
@@ -63,7 +64,7 @@ export default function Quiz(props: {
       if (!alive) return;
       setEntries(map);
       setQueue(ids);
-    })();
+    })().catch(() => alive && setLoadError(true));
     return () => {
       alive = false;
     };
@@ -74,6 +75,14 @@ export default function Quiz(props: {
     else readingRef.current?.focus();
   }, [graded, pos]);
 
+  if (loadError)
+    return (
+      <section className="card center">
+        <h2>문제를 불러오지 못했어요</h2>
+        <p className="muted">{OFFLINE_HINT}</p>
+        <div className="actions"><button className="primary" onClick={() => go({ name: "home" })}>처음으로</button></div>
+      </section>
+    );
   if (!entries) return <p className="muted">불러오는 중…</p>;
   const id = queue[pos];
   const item = id ? entries.get(id) : undefined;

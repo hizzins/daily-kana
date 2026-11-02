@@ -17,17 +17,23 @@ async function getJson<T>(path: string): Promise<T> {
 
 export const loadManifest = () => getJson<Manifest>("levels.json");
 
-const cache = new Map<Level, Promise<AppEntry[]>>();
-export function loadLevel(level: Level): Promise<AppEntry[]> {
-  if (!cache.has(level)) cache.set(level, getJson<AppEntry[]>(`${level}.json`));
+/** 실패한 요청은 캐시에서 빼서, 오프라인에서 못 받은 레벨을 연결된 뒤 다시 받을 수 있게 한다. */
+function cached<T>(cache: Map<Level, Promise<T>>, level: Level, path: string): Promise<T> {
+  if (!cache.has(level)) {
+    const p = getJson<T>(path);
+    cache.set(level, p);
+    p.catch(() => cache.delete(level));
+  }
   return cache.get(level)!;
 }
 
+const cache = new Map<Level, Promise<AppEntry[]>>();
+export const loadLevel = (level: Level) => cached(cache, level, `${level}.json`);
+
 const sentenceCache = new Map<Level, Promise<SentenceEntry[]>>();
-export function loadSentences(level: Level): Promise<SentenceEntry[]> {
-  if (!sentenceCache.has(level)) sentenceCache.set(level, getJson<SentenceEntry[]>(`${level}-sentences.json`));
-  return sentenceCache.get(level)!;
-}
+export const loadSentences = (level: Level) => cached(sentenceCache, level, `${level}-sentences.json`);
+
+export const OFFLINE_HINT = "인터넷에 연결된 상태에서 한 번 열면 그다음부터는 오프라인에서도 열려요.";
 
 // 설정은 이 기기 브라우저에만(localStorage). 사생활 모드 등에서 실패하면 기본값으로 동작한다.
 export function readSetting<T>(key: string, fallback: T): T {

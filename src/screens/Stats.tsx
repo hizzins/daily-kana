@@ -29,8 +29,11 @@ export default function Stats(props: { manifest: Manifest; db: ReviewDb; storage
   const reload = async () => {
     const all = (await db.export()).cards;
     const ready = LEVELS.filter((l) => manifest[l]?.ready);
-    const lists = await Promise.all(ready.map((l) => loadLevel(l)));
-    const sentenceLists = await Promise.all(ready.map((l) => (manifest[l]?.sentences ? loadSentences(l) : [])));
+    // 오프라인에서 못 받은 레벨은 빈 목록으로 두고 나머지를 보여 준다
+    const lists = await Promise.all(ready.map((l) => loadLevel(l).catch((): AppEntry[] => [])));
+    const sentenceLists = await Promise.all(
+      ready.map((l) => (manifest[l]?.sentences ? loadSentences(l).catch((): SentenceEntry[] => []) : [])),
+    );
     const map = new Map<string, Shown>();
     lists.flat().forEach((e) => map.set(e.id, { kind: "word", e }));
     sentenceLists.flat().forEach((e) => map.set(e.id, { kind: "sentence", e }));
