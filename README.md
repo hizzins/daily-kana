@@ -12,6 +12,7 @@
 npm install
 npm run dev      # 개발 서버
 npm test         # 단위 테스트
+npm run e2e      # 빌드 후 화면 테스트(Playwright, 설치된 Chrome 사용)
 npm run build    # 타입 검사 + 빌드(dist/)
 npm run data -- build   # 단어 데이터 검사 후 public/data 생성
 ```

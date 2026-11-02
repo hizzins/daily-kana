@@ -6,3 +6,5 @@ dist/
 .DS_Store
 .work/
 *.tsbuildinfo
+test-results/
+playwright-report/

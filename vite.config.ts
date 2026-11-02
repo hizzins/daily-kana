@@ -1,10 +1,13 @@
+/// <reference types="vitest/config" />
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 import { VitePWA } from "vite-plugin-pwa";
+import { configDefaults } from "vitest/config";
 
 // 상대 경로로 빌드해 GitHub Pages 하위 경로(/daily-kana/)에서도 그대로 동작하게 한다.
 export default defineConfig({
   base: "./",
+  test: { exclude: [...configDefaults.exclude, "e2e/**"] }, // e2e 는 Playwright 가 돈다
   plugins: [
     react(),
     VitePWA({
